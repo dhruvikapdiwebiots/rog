@@ -1,0 +1,13 @@
+//app package
+export 'package:rog/utils/assets/index.dart';
+export 'package:rog/utils/assets/index.dart';
+export 'package:rog/utils/index.dart';
+export 'package:get/get.dart';
+export 'package:rog/route/index.dart';
+export 'package:rog/theme/app_array.dart';
+export 'package:rog/theme/app_font.dart';
+export 'package:rog/theme/index.dart';
+export 'package:rog/utils/app_screen_util.dart';
+export 'package:flutter/cupertino.dart';
+export 'package:rog/utils/alertBox.dart';
+export 'package:rog/utils/sharedPreference.dart';

@@ -1,0 +1,56 @@
+
+class AppFont {
+  String userName1 = "kinfinity";
+  String password1 = "kinfinity";
+  String userName2 = "poweruser";
+  String password2 = "kinfinitypower";
+  String userName = "Username";
+  String hintuserName = "Username ex: Test";
+  String password = "Password";
+  String hintpassword = "Password ex: Test@123";
+  String userFieldError = "Please Enter Username";
+  String passwordFieldError = "Please Enter Password";
+  String inCorrectUsername = "Incorrect UserName";
+  String inCorrectpassword = "Incorrect Password";
+  String login = "Login";
+  String viewPlans = "View Exercise Plan";
+  String hello = "Hello,";
+  String admin = "User";
+  String support = "support";
+  String setting = "setting";
+  String sensorConnected = "Sensors connected";
+  String sensorDetailButton = "Show Sensors Details";
+  String progress = "Progress";
+  String completedExercises = "Completed \nExercises";
+  String trainingDays = "Training \nDays";
+  String skipped = "Skipped";
+  String completed = "Completed";
+  String notcompleted = "Not completed";
+  String ok = "OK";
+  String of = "of";
+  String yes = "Yes";
+  String no = "No";
+  String packetCounter = 'Packet Counter';
+  String flexionValue = 'Flexion Value';
+  String sensor = 'Sensor';
+  String master = 'Master';
+  String slave = 'Slave';
+  String labelSha = 'SHA :';
+  String protocol = 'Protocole :';
+  String serial = 'Serial :';
+  String deviceNotification = 'Device Notification Field';
+  String calibrate = 'Calibrate';
+  String exerciseList = 'Exercise List';
+  String startExercise = 'Start Exercise';
+  String isVideoTitle = 'Show video tutorial before each \nexercise';
+  String stepsToFollow = 'Steps To Follow';
+  String hotspotConnect = 'Your hotspot is connected.';
+  String pleaseHotspotConnect = 'Please connect your hotspot!';
+  String connectSensor = 'You are connected with sensor';
+  String askForLogout = "Do you really want to logout?";
+  String alert = "Alert";
+  String alertLoading = "Alert Loading";
+  String areYouSure = "Are you sure";
+  String confirmationForexitApp = "Do you want to exit an app?";
+
+}
