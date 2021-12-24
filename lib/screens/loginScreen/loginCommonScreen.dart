@@ -39,52 +39,85 @@ class LoginCommonScreen {
   final licenceAndPrivacyText = (text) => LoginCommonScreen().commonText(text,
       color: appColor.buttonColor, fontSize: 16, fontWeight: FontWeight.w500);
 
+  //error show Layout
+  final errorShow = Container(
+      alignment: Alignment.center,
+      child: Text(
+        AppFont().inValidEmailOrPassword,
+        style: TextStyle(color: appColor.redColor),
+      ));
+
+  final signupContainerLayout = ({GestureTapCallback? onTap}) => InkWell(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        child: Text(
+          AppFont().signupForFree,
+          style: TextStyle(
+              fontSize: AppScreenUtil().fontSize(18),
+              decoration: TextDecoration.underline,
+              color: appColor.blackColor,
+              fontWeight: FontWeight.w500),
+        ),
+      ));
+
+
   //main body ui design
-  final body = (
-    BuildContext context,
-    _formKey,
-    userLayout,
-    passwordLayout,
-    forgotuserIdandPasswordLayout,
-    buttonLayout,
-      licenceAndPrivacyLayout,
-      signupLayout,
-      isShowError
-  ) =>
+  final body = (BuildContext context,
+          _formKey,
+          userLayout,
+          passwordLayout,
+          forgotuserIdandPasswordLayout,
+          buttonLayout,
+          licenceAndPrivacyLayout,
+          signupLayout,
+          isShowError,
+          isVisible,
+          forgotPasswordLayotwithEmail) =>
       Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LoginScreenStyle().specing(30.0),
-              LoginCommonScreen().imageLayout,
-              LoginScreenStyle().specing(10.0),
-              isShowError,
-              LoginScreenStyle().specing(30.0),
-              userLayout,
-              LoginScreenStyle().specing(30.0),
-              passwordLayout,
-              LoginScreenStyle().specing(30.0),
-              forgotuserIdandPasswordLayout,
-              LoginScreenStyle().specing(50.0),
-              buttonLayout,
-              LoginScreenStyle().specing(10.0),
-              licenceAndPrivacyLayout,
-              LoginScreenStyle().specing(25.0),
-              signupLayout
-            ],
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                LoginScreenStyle().specing(10.0),
+                LoginCommonScreen().imageLayout,
+                LoginScreenStyle().specing(10.0),
+                isVisible == false
+                    ? Column(
+                        children: [
+                          isShowError,
+                          LoginScreenStyle().specing(30.0),
+                          userLayout,
+                          LoginScreenStyle().specing(30.0),
+                          passwordLayout,
+                          LoginScreenStyle().specing(30.0),
+                          forgotuserIdandPasswordLayout,
+                          LoginScreenStyle().specing(50.0),
+                          buttonLayout,
+                          LoginScreenStyle().specing(15.0),
+                          licenceAndPrivacyLayout,
+                          LoginScreenStyle().specing(25.0),
+                          signupLayout
+                        ],
+                      )
+                    : forgotPasswordLayotwithEmail,
+              ],
+            ),
           ));
 
   // SubmitButton
-  final submitButton = ({GestureTapCallback? onTap}) => InkWell(
-      onTap: onTap,
-      child: LoginScreenStyle().buttonContainerStyle(
-        child: LoginScreenStyle().animatedContainer(
-          child: Text(
-            AppFont().signIn,
-            style: LoginScreenStyle().btnTextstyle,
-          ),
-        ),
-      ));
+  final submitButton =
+      ({GestureTapCallback? onTap, bool? isVisible}) => InkWell(
+          onTap: onTap,
+          child: LoginScreenStyle().buttonContainerStyle(
+            child: LoginScreenStyle().animatedContainer(
+              child: Text(
+                isVisible == false ? AppFont().signIn : AppFont().send,
+                style: LoginScreenStyle().btnTextstyle,
+              ),
+            ),
+          ));
 }

@@ -28,7 +28,12 @@ class _SplashScreenState extends State<SplashScreen>
 
   //check wether user already login or not
   void checkLogin() async {
-    Get.toNamed(routeName.loginScreen);
+    String? token =await SharedPref().getSharedPref('token');
+    if(token != null && token != ""){
+      Get.toNamed(routeName.dashboard);
+    }else {
+      Get.toNamed(routeName.loginScreen);
+    }
   }
 
   @override

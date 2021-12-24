@@ -20,7 +20,7 @@ class _PrivacyAndLicenceState extends State<PrivacyAndLicence> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'By proceeding, you are agree to our ',
+              text: 'By proceeding, you agree to our ',
               style: TextStyle(color: Colors.black54),
             ),
             TextSpan(

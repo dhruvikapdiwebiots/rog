@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:rog/utils/loading_controller.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
@@ -26,5 +26,15 @@ class Helper {
   showLoading() => loadingCtrl.showLoading();
 
   hideLoading() => loadingCtrl.hideLoading();
+
+  //ur launcher
+  launchURL(url) async {
+    print('url : $url');
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
 }

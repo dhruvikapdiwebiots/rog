@@ -6,20 +6,20 @@ class LoginScreenStyle {
   // Speacing Height
 
   final specing = (data) => SizedBox(
-    height: AppScreenUtil().size(data),
-  );
+        height: AppScreenUtil().size(data),
+      );
 
   // Speacing Width
   final specingWidth = (data) => SizedBox(
-    width: AppScreenUtil().size(data),
-  );
+        width: AppScreenUtil().size(data),
+      );
 
   //container box decoration for completedexercise and training
   final boxDecoration = (
-      {List<BoxShadow>? boxShadow,
-        double borderRadius = 0,
-        Color? color,
-        Color? borderColor}) =>
+          {List<BoxShadow>? boxShadow,
+          double borderRadius = 0,
+          Color? color,
+          Color? borderColor}) =>
       BoxDecoration(
           boxShadow: boxShadow,
           color: color,
@@ -29,10 +29,10 @@ class LoginScreenStyle {
 
   // Common Text
   final commonTextStyle = (
-      {double? fontSize,
-        FontWeight? fontWeight,
-        Color? color,
-        double? letterSpacing}) =>
+          {double? fontSize,
+          FontWeight? fontWeight,
+          Color? color,
+          double? letterSpacing}) =>
       TextStyle(
           fontSize: AppScreenUtil().fontSize(fontSize!),
           fontFamily: GoogleFonts.poppins().fontFamily,
@@ -71,20 +71,30 @@ class LoginScreenStyle {
 
 //image layout container
   final imageLayoutContainer = ({Widget? child}) => Container(
-    alignment: Alignment.bottomRight,
-    width: AppScreenUtil().screenActualWidth(),
-    height: AppScreenUtil().screenHeight(250.0),
-    decoration: BoxDecoration(
-        color: appColor.primaryColor,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60))),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [child!],
-    ),
-  );
+        alignment: Alignment.bottomRight,
+        width: AppScreenUtil().screenActualWidth(),
+        height: AppScreenUtil().screenHeight(250.0),
+        decoration: BoxDecoration(
+            color: appColor.primaryColor,
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [child!],
+        ),
+      );
 
 //forgot userid and password Style
   final forgotUseridandpasswordStyle = TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
       fontSize: AppScreenUtil().fontSize(14));
+
+  //back Icon Style
+  final backIconStyle = ({Widget? child}) => Container(
+        padding: EdgeInsets.all(AppScreenUtil().size(5)),
+        decoration: BoxDecoration(
+          border: Border.all(color: appColor.primaryColor),
+          borderRadius: BorderRadius.circular(AppScreenUtil().borderRadius(20)),
+        ),
+        child: child,
+      );
 }
