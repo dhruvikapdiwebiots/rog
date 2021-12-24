@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     lockScreenPortrait();
     return ScreenUtilInit(
       designSize: Size(360, 690),
-      builder: () => MaterialApp(
+      builder: () => GetMaterialApp(
         builder: (context, widget) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -26,9 +26,10 @@ class MyApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
         locale: Locale('en', 'US'),
-
+        fallbackLocale: Locale('en', 'US'), // tran
         title: "Rog",
         home: SplashScreen(),
+        getPages: appRoute.getPages,
         theme: appTheme.lightTheme,
         darkTheme: appTheme.darkTheme,
 

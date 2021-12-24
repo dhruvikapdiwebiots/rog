@@ -20,8 +20,10 @@ class AppColor {
   final Color lightGreyColor = const Color(0XFFCCCCCC);
   final Color dividerColor = Colors.grey;
   final Color gray = const Color(0xFF7C7C7C);
+  final Color grey = Colors.grey[500]!;
   final Color secondary = const Color(0xFFF5A313);
   final Color buttonTextColor = Colors.white;
+  final Color buttonColor = Color(0xFF5CD8B3);
   final Color inputBorder = const Color(0xFFE6E8EA);
   final Color lightSkyColor = const Color(0xFFD6FFFA);
   final Color lightOrangeColor = const Color(0xFFFFF5D9);

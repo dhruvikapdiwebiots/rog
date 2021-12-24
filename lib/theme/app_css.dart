@@ -95,4 +95,11 @@ class AppCss {
     fontSize: _appScreenUtil.fontSize(14),
     color: appColor.primaryColor,
   );
+
+
+  TextStyle text16White = new TextStyle(
+    fontWeight: regular,
+    fontSize: _appScreenUtil.fontSize(16),
+    color: appColor.whiteColor,
+  );
 }

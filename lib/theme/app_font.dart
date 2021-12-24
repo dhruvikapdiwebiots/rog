@@ -5,14 +5,15 @@ class AppFont {
   String userName2 = "poweruser";
   String password2 = "kinfinitypower";
   String userName = "Username";
-  String hintuserName = "Username ex: Test";
+  String hintuserName = "Email";
   String password = "Password";
-  String hintpassword = "Password ex: Test@123";
+  String hintpassword = "Password";
   String userFieldError = "Please Enter Username";
   String passwordFieldError = "Please Enter Password";
   String inCorrectUsername = "Incorrect UserName";
   String inCorrectpassword = "Incorrect Password";
-  String login = "Login";
+  String signIn = "Sign In";
+  String signupForFree = "Sign up For Free";
   String viewPlans = "View Exercise Plan";
   String hello = "Hello,";
   String admin = "User";
@@ -52,5 +53,8 @@ class AppFont {
   String alertLoading = "Alert Loading";
   String areYouSure = "Are you sure";
   String confirmationForexitApp = "Do you want to exit an app?";
+  String forgotUserIDPassword = 'I forgot my User ID or password';
+  String licenceAgreement = 'Licence Agreement';
+  String privacyStatment = 'Privacy Statment';
 
 }

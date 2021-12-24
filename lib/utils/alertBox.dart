@@ -97,6 +97,7 @@ class Alertbox {
   }
 */
 
+  //exit from the app pop
   appClose(context) async {
     return showDialog(
         context: context,
@@ -134,4 +135,14 @@ class Alertbox {
           );
         });
   }
+
+  successMessage(message) => Get.snackbar('Success', message,
+      backgroundColor: Colors.green, colorText: Colors.white);
+
+  errorMessage(message) => Get.snackbar('Error', message,
+      backgroundColor: Colors.red, colorText: Colors.white);
+
+  alertMessage(message) => Get.snackbar('Alert', message,
+      backgroundColor: Colors.yellow, colorText: Colors.black);
+
 }
