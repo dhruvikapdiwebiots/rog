@@ -6,8 +6,9 @@ import 'package:rog/screens/loginScreen/loginScreen_Style.dart';
 class ForgotPasswordLayout extends StatefulWidget {
   Widget? userLayout;
   Widget? buttonLayout;
+  Widget? isShowError;
   GestureTapCallback? onTap;
-  ForgotPasswordLayout({Key? key,this.buttonLayout,this.userLayout,this.onTap}) : super(key: key);
+  ForgotPasswordLayout({Key? key,this.buttonLayout,this.userLayout,this.onTap,this.isShowError}) : super(key: key);
 
   @override
   _ForgotPasswordLayoutState createState() => _ForgotPasswordLayoutState();
@@ -20,6 +21,12 @@ class _ForgotPasswordLayoutState extends State<ForgotPasswordLayout> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Column(
+            children: [
+              widget.isShowError!,
+              LoginScreenStyle().specing(30.0),
+            ],
+          ),
           LoginCommonScreen().commonText(AppFont().forgotPassword,fontWeight: FontWeight.w600,fontSize: 22),
           LoginCommonScreen().commonText(AppFont().instructionForPassword,fontSize: 14,color: appColor.grey),
           LoginScreenStyle().specing(10),

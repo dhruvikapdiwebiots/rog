@@ -12,6 +12,7 @@ class LoginController extends GetxController {
   final FocusNode passwordFocus = FocusNode();
   dynamic title = '';
   bool isShowError = false;
+  bool isEmailShowError = false;
   bool isVisible = false;
 
   // Toggle Between Password show
@@ -20,6 +21,7 @@ class LoginController extends GetxController {
     update();
   }
 
+  //login api
   checkLogin() async {
     isLoading = true;
     update();
@@ -72,9 +74,11 @@ class LoginController extends GetxController {
     }
   }
 
+  //forgot password api
   forgotPassword(context) async {
     print('Calling');
     isLoading = true;
+    isEmailShowError = false;
     update();
     try {
       var requestData = {"email": user.text};
@@ -88,48 +92,22 @@ class LoginController extends GetxController {
         update();
         _ourAutoDismissDialog(context);
       } else {
+        isEmailShowError = true;
         isLoading = false;
         update();
-        print(resData.data);
-        Alertbox().alertMessage('Might be some issue while Login');
+        print('error : ${resData.data}');
       }
       isLoading = false;
     } catch (e) {
+      print('error');
+      isEmailShowError = true;
       isLoading = false;
       update();
       print(e);
     }
   }
 
-  signup(context) async {
-    print('Calling');
-    isLoading = true;
-    update();
-    try {
-      var requestData = {"email": user.text};
-
-      print(requestData.toString());
-      var resData = await apis.postApi(apiMethods.forgotpassword, requestData);
-      print('status :${resData.statusCode}');
-      if (resData.statusCode == 200) {
-        isLoading = false;
-        isVisible = false;
-        update();
-        _ourAutoDismissDialog(context);
-      } else {
-        isLoading = false;
-        update();
-        print(resData.data);
-        Alertbox().alertMessage('Might be some issue while Login');
-      }
-      isLoading = false;
-    } catch (e) {
-      isLoading = false;
-      update();
-      print(e);
-    }
-  }
-
+  //auto dissmiss pop out
   void _ourAutoDismissDialog(BuildContext context){
 
     //Calling out showdialog method
@@ -143,12 +121,7 @@ class LoginController extends GetxController {
     });
   }
 
-
-  onConfirm(context) {
-    isVisible = false;
-    update();
-  }
-
+  //on back hide forget password layout
   isBack() {
     isVisible = false;
     update();

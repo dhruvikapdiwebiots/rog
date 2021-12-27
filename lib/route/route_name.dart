@@ -6,4 +6,8 @@ class RouteName {
   final String exerciseList = '/exerciseList';
   final String exerciseDetailPopup = '/exerciseDetailPopup';
   final String liveExerciseScreen = '/liveExerciseScreen';
+  final String groupCameraList = '/groupCameraList';
+  final String cameraCard = '/cameraCard';
+  final String privacyStatement = '/privacyStatement';
+  final String licenseAgreement = '/licenseAgreement';
 }

@@ -18,7 +18,11 @@ class _CameraGroupState extends State<CameraGroup> {
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
-            return CameraGroupCard();
+            return CameraGroupCard(
+              onTap: (){
+                Get.toNamed(routeName.groupCameraList,arguments: 'Cobalt Security Seabridge');
+              },
+            );
           },
         ),
       ),

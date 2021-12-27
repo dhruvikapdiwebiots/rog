@@ -21,6 +21,7 @@ class AppColor {
   final Color lightGreyColor = const Color(0XFFCCCCCC);
   final Color dividerColor = Colors.grey;
   final Color gray = const Color(0xFF7C7C7C);
+  final Color darkGray = const Color(0xFF404040);
   final Color grey = Colors.grey[500]!;
   final Color secondary = const Color(0xFFF5A313);
   final Color buttonTextColor = Colors.white;
@@ -38,5 +39,7 @@ class AppColor {
   final liveScreenBackColor = const Color(0xFFE6E6E6);
   final activeInActiveColor = const Color(0xFFEBEBEB);
   final lineStyleColor = const Color(0xFF1B2F4A);
+  final selectItemColor = Color(0xFF5EC3B4);
+  final backgroundColor = Color(0xFFE9E9E9);
 
 }

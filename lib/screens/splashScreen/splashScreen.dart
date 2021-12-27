@@ -26,6 +26,13 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller!.dispose();
+    super.dispose();
+  }
+
   //check wether user already login or not
   void checkLogin() async {
     String? token =await SharedPref().getSharedPref('token');

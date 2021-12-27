@@ -47,6 +47,14 @@ class LoginCommonScreen {
         style: TextStyle(color: appColor.redColor),
       ));
 
+  //in valid errorerror show Layout
+  final inValidEmailerrorShow = Container(
+      alignment: Alignment.center,
+      child: Text(
+        AppFont().inValidEmail,
+        style: TextStyle(color: appColor.redColor),
+      ));
+
   final signupContainerLayout = ({GestureTapCallback? onTap}) => InkWell(
       onTap: onTap,
       child: Container(

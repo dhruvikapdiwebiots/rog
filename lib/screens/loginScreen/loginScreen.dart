@@ -88,10 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         PrivacyAndLicence(
           licenceonTap: () {
-            print('Tapped on hyperlink');
+            Get.toNamed(routeName.licenseAgreement);
           },
           privacyonTap: () {
-            print('Tapped on 1');
+            Get.toNamed(routeName.privacyStatement);
           },
         ),
       ],
@@ -101,6 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final isShowError = GetBuilder<LoginController>(builder: (_) {
       return loginCtrl.isShowError
           ? LoginCommonScreen().errorShow
+          : Container();
+    });
+
+    //isShow Invali Email Error
+    final isShowEmailInvalidError = GetBuilder<LoginController>(builder: (_) {
+      return loginCtrl.isEmailShowError
+          ? LoginCommonScreen().inValidEmailerrorShow
           : Container();
     });
 
@@ -120,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (_) => ForgotPasswordLayout(
       onTap: () => loginCtrl.isBack(),
       userLayout: userLayout,
-      buttonLayout: buttonLayout,
+      buttonLayout: buttonLayout,isShowError: isShowEmailInvalidError,
     ),);
 
     return WillPopScope(

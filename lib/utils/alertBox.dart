@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/dashboard/dashboardScreen_Style.dart';
 import 'package:rog/theme/app_font.dart';
 import 'package:rog/theme/index.dart';
 import 'package:rog/utils/app_screen_util.dart';
@@ -60,33 +62,32 @@ class Alertbox {
     );
   }
 
-/*
 
   //logout alert
-  alertBack(BuildContext context) {
+  alertLogout(BuildContext context) {
     showDialog(
       builder: (context) => AlertDialog(
         content: Text(AppFont().askForLogout),
+
         actions: [
           Container(
             margin: EdgeInsets.only(bottom: AppScreenUtil().size(10)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                HomeCommonScreen().customButton(
+                DashboardScreenStyle().customButton(
                     onTap: () async {
-                      SharedPref().remove("isLogin");
-                      SharedPref().remove("userName");
-                      Get.offAllNamed(routeName.login);
+                      SharedPref().remove("token");
+                      Get.offAllNamed(routeName.loginScreen);
                     },
                     text: AppFont().yes),
-                HomeScreenStyle().specingWidth(10),
-                HomeCommonScreen().customButton(
+                DashboardScreenStyle().specingWidth(10),
+                DashboardScreenStyle().customButton(
                     onTap: () async {
                       Get.back();
                     },
                     text: AppFont().no),
-                HomeScreenStyle().specingWidth(10),
+                DashboardScreenStyle().specingWidth(10),
               ],
             ),
           )
@@ -95,7 +96,6 @@ class Alertbox {
       context: Get.context!,
     );
   }
-*/
 
   //exit from the app pop
   appClose(context) async {
@@ -107,29 +107,20 @@ class Alertbox {
             child: AlertDialog(
               title: Text(AppFont().areYouSure),
               content: Text(AppFont().confirmationForexitApp),
+              actionsPadding: EdgeInsets.only(bottom: AppScreenUtil().size(10)),
               actions: [
-                new FlatButton(
-                  child: Text(
-                    AppFont().yes,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
-                  onPressed: () {
-                    SystemNavigator.pop();
-                  },
-                ),
-                new FlatButton(
-                  child: Text(
-                    AppFont().no,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
-                  onPressed: () => Get.back(),
-                ),
+                DashboardScreenStyle().customButton(
+                    onTap: () async {
+                      SystemNavigator.pop();
+                    },
+                    text: AppFont().yes),
+                DashboardScreenStyle().specingWidth(10),
+                DashboardScreenStyle().customButton(
+                    onTap: () async {
+                      Get.back();
+                    },
+                    text: AppFont().no),
+                DashboardScreenStyle().specingWidth(10),
               ],
             ),
           );
