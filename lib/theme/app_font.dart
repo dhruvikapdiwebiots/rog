@@ -11,6 +11,7 @@ class AppFont {
   String inValidEmailOrPassword = "Invalid email or password";
   String inValidEmail = "Invalid email";
   String signIn = "Sign In";
+  String done = "Done";
   String send = "Send";
   String signupForFree = "Sign up For Free";
   String hello = "Hello,";
@@ -31,8 +32,8 @@ class AppFont {
   String licenceAgreement = 'license Agreement';
   String privacyStatment = 'Privacy Statement';
   String instructionForPassword = "Enter the email associated with your account and we'll send an email with link to reset your password";
-  String checkMail = "Check you Mail";
-  String checkMailMessage = "We have send a link to your email";
+  String checkMail = "Check you email";
+  String checkMailMessage = "We have sent a link to your email";
   String groups = "Groups";
   String mycameragroups = "My Camera Group";
   String cameragroups = "Camera Group";
@@ -40,5 +41,11 @@ class AppFont {
   String viewLive = "View Live (coming soon)";
   String alertGroup = "Alert Group";
   String lastImageReceived = "Last Image Recevied :";
+  String noInternet = "No Internet Connection";
+  String wentWrong = "Something went wrong. Try again after some time";
+  String addNote = "Add Note (coming soon)";
+  String name = "First Name :";
+  String lastname = "Last Name :";
+  String email = "Email :";
 
 }

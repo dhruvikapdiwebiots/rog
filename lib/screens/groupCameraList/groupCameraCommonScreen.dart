@@ -14,7 +14,7 @@ class GroupCameraCommonScreen {
       Text(
         text,
         textAlign: textAlign,
-        style: LoginScreenStyle().commonTextStyle(
+        style: GroupCameraScreenStyle().commonTextStyle(
             fontSize: fontSize,
             color: color,
             fontWeight: fontWeight,

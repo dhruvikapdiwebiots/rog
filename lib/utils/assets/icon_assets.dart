@@ -6,4 +6,5 @@ class IconAssets {
   final String next = 'assets/icons/next.png';
   final String view = 'assets/icons/view.png';
   final String wifi = 'assets/icons/wifi.png';
+  final String shiled = 'assets/icons/shiled.png';
 }

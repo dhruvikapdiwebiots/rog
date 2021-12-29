@@ -1,0 +1,183 @@
+{
+  "project_info": {
+    "project_number": "153344187169",
+    "firebase_url": "https://rog-2-0.firebaseio.com",
+    "project_id": "rog-2-0",
+    "storage_bucket": "rog-2-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153344187169:android:1da8b4735f11d494643c60",
+        "android_client_info": {
+          "package_name": "com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppZKCZW0tC7xuEc9JuPNzXC8A9jLUFaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153344187169-5jebrb202l69p2k2r7dkgobn1lif73jm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co-gorog-rog-2-0",
+                "app_store_id": "1477372252"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153344187169:android:e22de9c4b370c949643c60",
+        "android_client_info": {
+          "package_name": "com.example.rog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153344187169-ht6u2aui22qfg44vpt3808t7k08omcs5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rog",
+            "certificate_hash": "629bf5ae34c321f6a3fed52a561e1ce43766e99b"
+          }
+        },
+        {
+          "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppZKCZW0tC7xuEc9JuPNzXC8A9jLUFaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153344187169-5jebrb202l69p2k2r7dkgobn1lif73jm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co-gorog-rog-2-0",
+                "app_store_id": "1477372252"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153344187169:android:8b88a1106057b2f1643c60",
+        "android_client_info": {
+          "package_name": "com.example.rog_mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153344187169-lebdli7h4at74rhc8sulpdb0mguot6ot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rog_mobile_app",
+            "certificate_hash": "b823951906dcf16002c17ed35fcadc181f2a6369"
+          }
+        },
+        {
+          "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppZKCZW0tC7xuEc9JuPNzXC8A9jLUFaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153344187169-5jebrb202l69p2k2r7dkgobn1lif73jm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co-gorog-rog-2-0",
+                "app_store_id": "1477372252"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153344187169:android:51446ce7a7be928c643c60",
+        "android_client_info": {
+          "package_name": "com.gorog.rog2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153344187169-r2i4m6shf26o9forh3l9r4tte3artjt1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gorog.rog2",
+            "certificate_hash": "90ff6b77f9f3547ff9238973fa641179596c1423"
+          }
+        },
+        {
+          "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppZKCZW0tC7xuEc9JuPNzXC8A9jLUFaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153344187169-eb08dme99o9mip1n0tbk46tephnobbmv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153344187169-5jebrb202l69p2k2r7dkgobn1lif73jm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co-gorog-rog-2-0",
+                "app_store_id": "1477372252"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

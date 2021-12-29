@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/splashScreen/splashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:rog/utils/commonController.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await GetStorage.init();
+  Get.put(CommonController());
   runApp(MyApp());
 }
 
