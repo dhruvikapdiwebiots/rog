@@ -19,7 +19,9 @@ class Apis {
           print("authToken : $authToken");
         } else {
           authToken = await SharedPref().getSharedPref('token');
+          print("authToken : $authToken");
         }
+        print('apiurl : ${serverConfig.apiUrl + apiName}');
 
         GetHttpClient reqMethod = GetHttpClient();
         switch (type) {
@@ -45,7 +47,12 @@ class Apis {
             response = await dio.put(apiName, data: body);
             break;
           case 'patch':
-            response = await dio.patch(apiName, data: body);
+            response = await reqMethod.patch(serverConfig.apiUrl + apiName,
+                body: body,
+                headers: {
+                  'Authorization': 'Bearer $authToken',
+                  'Content-type': 'application/json'
+                });
             break;
         }
 

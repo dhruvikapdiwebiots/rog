@@ -3,6 +3,7 @@ import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
 import 'package:rog/screens/cameragroup/cameragroup.dart';
 import 'package:rog/screens/settingScreen/settingScreen.dart';
+import 'package:rog/utils/commonController.dart';
 import 'package:rog/utils/helper.dart';
 
 class DashboardController extends GetxController {
@@ -10,6 +11,7 @@ class DashboardController extends GetxController {
   String name = '';
   String lastname = '';
   String email = '';
+  CommonController commonController = Get.find();
 
 
   //list of bottomnavigator page

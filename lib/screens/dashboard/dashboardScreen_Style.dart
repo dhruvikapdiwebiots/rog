@@ -77,7 +77,7 @@ class DashboardScreenStyle {
       );
 
   //appbar style
-  final appBarStyle = (context, selectedIndex) => PreferredSize(
+  final appBarStyle = (context, selectedIndex,{GestureTapCallback? onTapPushNotification}) => PreferredSize(
         child: new Container(
           padding: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: new Padding(
@@ -86,15 +86,27 @@ class DashboardScreenStyle {
                 top: AppScreenUtil().size(20.0),
                 bottom: AppScreenUtil().size(20.0)),
             child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  onTap: () {
-                    Alertbox().alertLogout(context);
-                  },
-                  child: DashboardScreenStyle().menuiconStyl,
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Alertbox().alertLogout(context);
+                      },
+                      child: DashboardScreenStyle().menuiconStyl,
+                    ),
+                    DashboardScreenStyle().specingWidth(15),
+                    DashboardScreenStyle().titleStyle(selectedIndex),
+                  ],
                 ),
-                DashboardScreenStyle().specingWidth(15),
-                DashboardScreenStyle().titleStyle(selectedIndex)
+                Padding(
+                  padding: EdgeInsets.only(right: AppScreenUtil().size(15)),
+                  child: InkWell(
+                      onTap: onTapPushNotification,
+                      child: Icon(Icons.notifications_active, color: appColor.whiteColor,)),
+                ),
+                
               ],
             ),
           ),

@@ -32,7 +32,7 @@ class AppFont {
   String licenceAgreement = 'license Agreement';
   String privacyStatment = 'Privacy Statement';
   String instructionForPassword = "Enter the email associated with your account and we'll send an email with link to reset your password";
-  String checkMail = "Check you email";
+  String checkMail = "Check your email";
   String checkMailMessage = "We have sent a link to your email";
   String groups = "Groups";
   String mycameragroups = "My Camera Group";

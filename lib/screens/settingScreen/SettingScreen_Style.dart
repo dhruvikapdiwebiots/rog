@@ -51,4 +51,5 @@ class SettingScreenStyle {
       fontSize: AppScreenUtil().fontSize(20.0),
       fontFamily: GoogleFonts.poppins().fontFamily,
       fontWeight: FontWeight.w500);
+
 }

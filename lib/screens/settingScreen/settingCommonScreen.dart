@@ -37,6 +37,46 @@ class SettingCommonScreen {
         ),
       ));
 
+  //Inkwell Common
+  final iconInkWellCommon = (isEnable,{GestureTapCallback? onTap}) =>  InkWell(
+      onTap: onTap,
+      child: Icon(isEnable ?CupertinoIcons.pencil_ellipsis_rectangle :Icons.edit));
+
+  //commonLayout
+  final commonLayout = (isEnable,{Widget? textformfieldWidget,String? title,GestureTapCallback? onTap}) => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: AppScreenUtil().size(5)),
+              child: SettingCommonScreen()
+                  .commonText(AppFont().name, fontSize: 16),
+            ),
+            SettingScreenStyle().specing(5),
+            isEnable ? textformfieldWidget! : Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: AppScreenUtil().size(10),
+                    horizontal: AppScreenUtil().size(15)),
+                child:  SettingCommonScreen().commonText(
+                    title,
+                    fontSize: 14),
+              ),
+            )
+          ],
+        ),
+      ),
+      SettingCommonScreen().iconInkWellCommon(
+        isEnable,
+          onTap: onTap
+      )
+    ],
+  );
+
   //main body ui design
   final body = (BuildContext context,naemLayout,lastNameLayout,emailLayout,buttonLayout ) => SingleChildScrollView(
     child: Column(

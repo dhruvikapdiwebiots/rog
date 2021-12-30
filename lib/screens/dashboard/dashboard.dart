@@ -35,7 +35,8 @@ class _DashboardState extends State<Dashboard> {
               onTap: (index) => dashboardCtrl.navigationbarchange(index),
             ),
           ),
-          appBar: DashboardScreenStyle().appBarStyle(context,dashboardCtrl.selectedIndex),
+          appBar: DashboardScreenStyle().appBarStyle(context,dashboardCtrl.selectedIndex,
+          onTapPushNotification: () => dashboardCtrl.commonController.sendNotification(title: 'This is the Title',msg: 'This is the message')),
           body: dashboardCtrl.widgetOptions
               .elementAt(dashboardCtrl.selectedIndex),
         ),
