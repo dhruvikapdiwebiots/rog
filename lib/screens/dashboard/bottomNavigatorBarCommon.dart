@@ -10,11 +10,12 @@ class BottomNavigatorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+
       selectedFontSize: AppScreenUtil().fontSize(20),
       unselectedItemColor: appColor.grey,
       backgroundColor: appColor.primaryColor,
       selectedItemColor: appColor.selectItemColor,
-      selectedLabelStyle: TextStyle(fontSize: AppScreenUtil().size(18)),
+      selectedLabelStyle: TextStyle(fontSize: AppScreenUtil().size(16)),
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           backgroundColor: appColor.primaryColor,
@@ -30,9 +31,20 @@ class BottomNavigatorCard extends StatelessWidget {
         BottomNavigationBarItem(
           backgroundColor: appColor.primaryColor,
           icon: Image.asset(
-            iconAssets.bell,
+            iconAssets.shield,
             color: selectedIndex == 1 ? appColor.selectItemColor : appColor.grey,
             height: selectedIndex == 1
+                ? AppScreenUtil().size(23)
+                : AppScreenUtil().size(20),
+          ),
+          label: AppFont().connect,
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: appColor.primaryColor,
+          icon: Image.asset(
+            iconAssets.bell,
+            color: selectedIndex == 2 ? appColor.selectItemColor : appColor.grey,
+            height: selectedIndex == 2
                 ? AppScreenUtil().size(23)
                 : AppScreenUtil().size(20),
           ),
@@ -42,8 +54,8 @@ class BottomNavigatorCard extends StatelessWidget {
           backgroundColor: appColor.primaryColor,
           icon: Image.asset(
             iconAssets.settings,
-            color: selectedIndex == 2 ? appColor.selectItemColor : appColor.grey,
-            height: selectedIndex == 2
+            color: selectedIndex == 3 ? appColor.selectItemColor : appColor.grey,
+            height: selectedIndex == 3
                 ? AppScreenUtil().size(23)
                 : AppScreenUtil().size(20),
           ),

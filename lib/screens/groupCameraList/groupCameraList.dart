@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
+import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 import 'package:rog/screens/groupCameraList/groupCameraCommonScreen.dart';
 import 'package:rog/screens/groupCameraList/groupCameraListCard.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
@@ -24,33 +26,49 @@ class _GroupCameraListState extends State<GroupCameraList> {
     );
 
     return GetBuilder<GroupCameraListController>(
-      builder: (_) =>  Scaffold(
-        backgroundColor: appColor.backgroundColor,
-        appBar: AppBar(
-          title: GroupCameraCommonScreen().commonText(AppFont().cameragroups,fontSize: 18),
-        ),
-        body: Container(
-          child: Column(
-            children: [
-              cameraNameLayout,
-              GroupCameraScreenStyle().specing(10),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return GroupCameraListCard(
-                      onTap: (){
-                        var data = {
-                          'cameraName' :'Clubhouse Entrance Gate',
-                          'groupName': 'Cobalt Security Seabridge'
-                        };
-                        Get.toNamed(routeName.cameraCard,arguments: data);
-                      },
-                    );
-                  },
+      builder: (_) =>  GetBuilder<DashboardController>(
+        builder: (controller) => Scaffold(
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: appColor.primaryColor,
+              boxShadow: [
+                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+              ],
+            ),
+            child: BottomNavigatorCard(
+              selectedIndex: controller.selectedIndex,
+              onTap: (index) {
+                Get.back();
+                controller.navigationbarchange(index);},
+            ),
+          ),
+          backgroundColor: appColor.backgroundColor,
+          appBar: AppBar(
+            title: GroupCameraCommonScreen().commonText(AppFont().cameragroups,fontSize: 18),
+          ),
+          body: Container(
+            child: Column(
+              children: [
+                cameraNameLayout,
+                GroupCameraScreenStyle().specing(10),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return GroupCameraListCard(
+                        onTap: (){
+                          var data = {
+                            'cameraName' :'Clubhouse Entrance Gate',
+                            'groupName': 'Cobalt Security Seabridge'
+                          };
+                          Get.toNamed(routeName.cameraCard,arguments: data);
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

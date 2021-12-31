@@ -12,10 +12,10 @@ class DashboardScreenStyle {
   //text STyle
   final titleStyle = (selectedIndex) => Text(
         selectedIndex == 0
-            ? AppFont().mycameragroups
-            : selectedIndex == 1
-                ? AppFont().alerts
-                : AppFont().setting,
+            ? AppFont().mycameragroups : selectedIndex == 1 ? AppFont().connect
+            : selectedIndex == 2
+                ? AppFont().alert
+                : AppFont().loginSecurity,
         style: new TextStyle(
             fontFamily: GoogleFonts.poppins().fontFamily,
             fontSize: AppScreenUtil().fontSize(18.0),
@@ -39,8 +39,8 @@ class DashboardScreenStyle {
       ]);
 
 //menu Icon Style
-  final menuiconStyl = Icon(
-    Icons.menu,
+  final menuiconStyl =(icon)=> Icon(
+    icon,
     color: appColor.whiteColor,
   );
 
@@ -77,7 +77,7 @@ class DashboardScreenStyle {
       );
 
   //appbar style
-  final appBarStyle = (context, selectedIndex,{GestureTapCallback? onTapPushNotification}) => PreferredSize(
+  final appBarStyle = (context, selectedIndex,{GestureTapCallback? onTapPushNotification, GestureTapCallback? onBack}) => PreferredSize(
         child: new Container(
           padding: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: new Padding(
@@ -90,12 +90,15 @@ class DashboardScreenStyle {
               children: [
                 Row(
                   children: [
-                    InkWell(
+                    selectedIndex == 0 ?InkWell(
                       onTap: () {
                         Alertbox().alertLogout(context);
                       },
-                      child: DashboardScreenStyle().menuiconStyl,
-                    ),
+                      child: DashboardScreenStyle().menuiconStyl(Icons.menu),
+                    ) : InkWell(
+                      onTap: onBack,
+                      child: DashboardScreenStyle().menuiconStyl(Icons.arrow_back),
+                    ) ,
                     DashboardScreenStyle().specingWidth(15),
                     DashboardScreenStyle().titleStyle(selectedIndex),
                   ],

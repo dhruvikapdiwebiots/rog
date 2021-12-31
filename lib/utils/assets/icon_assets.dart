@@ -7,4 +7,5 @@ class IconAssets {
   final String view = 'assets/icons/view.png';
   final String wifi = 'assets/icons/wifi.png';
   final String shiled = 'assets/icons/shiled.png';
+  final String shield = 'assets/icons/shield.png';
 }

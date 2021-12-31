@@ -17,12 +17,13 @@ class AppFont {
   String hello = "Hello,";
   String admin = "User";
   String setting = "Settings";
+  String loginSecurity = "Login & Security";
   String ok = "OK";
   String of = "of";
   String yes = "Yes";
   String no = "No";
   String askForLogout = "Do you really want to logout?";
-  String alert = "Alert";
+  String alert = "My Alerts";
   String alerts = "Alerts";
   String alertLoading = "Alerts Loading";
   String areYouSure = "Are you sure";
@@ -35,7 +36,7 @@ class AppFont {
   String checkMail = "Check your email";
   String checkMailMessage = "We have sent a link to your email";
   String groups = "Groups";
-  String mycameragroups = "My Camera Group";
+  String mycameragroups = "My Camera Groups";
   String cameragroups = "Camera Group";
   String cameraView = "Camera View";
   String viewLive = "View Live (coming soon)";
@@ -47,5 +48,6 @@ class AppFont {
   String name = "First Name :";
   String lastname = "Last Name :";
   String email = "Email :";
+  String connect = "Connect";
 
 }

@@ -43,7 +43,7 @@ class SettingCommonScreen {
       child: Icon(isEnable ?CupertinoIcons.pencil_ellipsis_rectangle :Icons.edit));
 
   //commonLayout
-  final commonLayout = (isEnable,{Widget? textformfieldWidget,String? title,GestureTapCallback? onTap}) => Row(
+  final commonLayout = (title,isEnable,{Widget? textformfieldWidget,String? value,GestureTapCallback? onTap}) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Expanded(
@@ -54,7 +54,7 @@ class SettingCommonScreen {
             Padding(
               padding: EdgeInsets.only(left: AppScreenUtil().size(5)),
               child: SettingCommonScreen()
-                  .commonText(AppFont().name, fontSize: 16),
+                  .commonText(title, fontSize: 16),
             ),
             SettingScreenStyle().specing(5),
             isEnable ? textformfieldWidget! : Card(
@@ -63,7 +63,7 @@ class SettingCommonScreen {
                     vertical: AppScreenUtil().size(10),
                     horizontal: AppScreenUtil().size(15)),
                 child:  SettingCommonScreen().commonText(
-                    title,
+                    value,
                     fontSize: 14),
               ),
             )

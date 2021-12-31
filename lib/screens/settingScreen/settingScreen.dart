@@ -19,14 +19,14 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     //name Layout
     final naemLayout = GetBuilder<SettingController>(
-        builder: (_) => SettingCommonScreen().commonLayout(settingCtrl.isEnable,
+        builder: (_) => SettingCommonScreen().commonLayout(AppFont().name,settingCtrl.isEnable,
                 textformfieldWidget: Container(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: settingCtrl.controller,
                   ),
                 ),
-                title: settingCtrl.dashboardCtrl.name, onTap: () {
+                value: settingCtrl.dashboardCtrl.name, onTap: () {
               print('tap');
               settingCtrl.isNameEdit();
             }));
@@ -34,14 +34,14 @@ class _SettingScreenState extends State<SettingScreen> {
     //Lastname Layout
     final lastNameLayout = GetBuilder<SettingController>(
         builder: (_) =>
-            SettingCommonScreen().commonLayout(settingCtrl.isLastNameEnable,
+            SettingCommonScreen().commonLayout(AppFont().lastname,settingCtrl.isLastNameEnable,
                 textformfieldWidget: Container(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: settingCtrl.lastNameController,
                   ),
                 ),
-                title: settingCtrl.dashboardCtrl.lastname, onTap: () {
+                value: settingCtrl.dashboardCtrl.lastname, onTap: () {
               print('tap');
               settingCtrl.isLastNameEdit();
             }));

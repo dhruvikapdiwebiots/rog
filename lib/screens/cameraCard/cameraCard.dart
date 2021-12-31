@@ -5,6 +5,8 @@ import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
 import 'package:rog/screens/cameraCard/cameraCard_controller.dart';
 import 'package:rog/screens/cameraCard/viewandalertLayout.dart';
+import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
+import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({Key? key}) : super(key: key);
@@ -68,15 +70,31 @@ class _CameraCardState extends State<CameraCard> {
     );
 
     return GetBuilder<CameraCardController>(
-      builder: (_) => Scaffold(
-        //  backgroundColor: appColor.gray,
-        appBar: AppBar(
-          title: CameraCardCommonScreen()
-              .commonText(AppFont().cameraView, fontSize: 18),
-        ),
-        body: Container(
-          child: CameraCardCommonScreen()
-              .body(context, cameraNameLayout, imageLayout,timeDateDisplay),
+      builder: (_) => GetBuilder<DashboardController>(
+        builder: (controller) => Scaffold(
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: appColor.primaryColor,
+              boxShadow: [
+                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+              ],
+            ),
+            child: BottomNavigatorCard(
+              selectedIndex: controller.selectedIndex,
+              onTap: (index) {
+                Get.back();
+                Get.back();
+                controller.navigationbarchange(index);},
+            ),
+          ),
+          appBar: AppBar(
+            title: CameraCardCommonScreen()
+                .commonText(AppFont().cameraView, fontSize: 18),
+          ),
+          body: Container(
+            child: CameraCardCommonScreen()
+                .body(context, cameraNameLayout, imageLayout,timeDateDisplay),
+          ),
         ),
       ),
     );
