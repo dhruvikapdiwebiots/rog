@@ -10,4 +10,5 @@ class RouteName {
   final String cameraCard = '/cameraCard';
   final String privacyStatement = '/privacyStatement';
   final String licenseAgreement = '/licenseAgreement';
+  final String webView = '/webView';
 }

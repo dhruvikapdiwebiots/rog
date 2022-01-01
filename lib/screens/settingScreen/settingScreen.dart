@@ -19,29 +19,30 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     //name Layout
     final naemLayout = GetBuilder<SettingController>(
-        builder: (_) => SettingCommonScreen().commonLayout(AppFont().name,settingCtrl.isEnable,
-                textformfieldWidget: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    controller: settingCtrl.controller,
-                  ),
-                ),
-                value: settingCtrl.dashboardCtrl.name, onTap: () {
+        builder: (_) => SettingCommonScreen()
+                .commonLayout(AppFont().name, settingCtrl.isEnable,
+                    textformfieldWidget: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        controller: settingCtrl.controller,
+                      ),
+                    ),
+                    value: settingCtrl.dashboardCtrl.name, onTap: () {
               print('tap');
               settingCtrl.isNameEdit();
             }));
 
     //Lastname Layout
     final lastNameLayout = GetBuilder<SettingController>(
-        builder: (_) =>
-            SettingCommonScreen().commonLayout(AppFont().lastname,settingCtrl.isLastNameEnable,
-                textformfieldWidget: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    controller: settingCtrl.lastNameController,
-                  ),
-                ),
-                value: settingCtrl.dashboardCtrl.lastname, onTap: () {
+        builder: (_) => SettingCommonScreen()
+                .commonLayout(AppFont().lastname, settingCtrl.isLastNameEnable,
+                    textformfieldWidget: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        controller: settingCtrl.lastNameController,
+                      ),
+                    ),
+                    value: settingCtrl.dashboardCtrl.lastname, onTap: () {
               print('tap');
               settingCtrl.isLastNameEdit();
             }));
@@ -57,16 +58,14 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingCommonScreen()
                         .commonText(AppFont().email, fontSize: 16),
                     SettingScreenStyle().specingWidth(10),
-                    Card(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: AppScreenUtil().size(10),
-                            horizontal: AppScreenUtil().size(15)),
-                        child: SettingCommonScreen().commonText(
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: AppScreenUtil().size(10),
+                      ),
+                      child: SettingCommonScreen().commonText(
                           settingCtrl.dashboardCtrl.email,
                           fontSize: 14,
-                        ),
-                      ),
+                          textDecoration: TextDecoration.underline),
                     )
                   ],
                 ),
@@ -84,14 +83,16 @@ class _SettingScreenState extends State<SettingScreen> {
     return GetBuilder<SettingController>(
       builder: (_) => Scaffold(
         body: SingleChildScrollView(
-          child: settingCtrl.isLoading ?  LoadingComponent() : Container(
-            height: MediaQuery.of(context).size.height,
-            margin: EdgeInsets.symmetric(
-                vertical: AppScreenUtil().size(25),
-                horizontal: AppScreenUtil().size(20)),
-            child: SettingCommonScreen().body(
-                context, naemLayout, lastNameLayout, emailLayout, buttonLayout),
-          ),
+          child: settingCtrl.isLoading
+              ? LoadingComponent()
+              : Container(
+                  height: MediaQuery.of(context).size.height,
+                  margin: EdgeInsets.symmetric(
+                      vertical: AppScreenUtil().size(25),
+                      horizontal: AppScreenUtil().size(20)),
+                  child: SettingCommonScreen().body(context, naemLayout,
+                      lastNameLayout, emailLayout, buttonLayout),
+                ),
         ),
       ),
     );

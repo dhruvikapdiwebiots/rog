@@ -88,10 +88,11 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         PrivacyAndLicence(
           licenceonTap: () {
-            Get.toNamed(routeName.licenseAgreement);
+
+            Get.toNamed(routeName.webView,arguments: 'License Agreement');
           },
           privacyonTap: () {
-            Get.toNamed(routeName.privacyStatement);
+            Get.toNamed(routeName.webView,arguments: 'Privacy Statement');
           },
         ),
       ],

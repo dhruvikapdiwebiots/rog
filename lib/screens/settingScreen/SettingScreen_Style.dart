@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rog/packages/config_package.dart';
-import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
 
 class SettingScreenStyle {
   // Speacing Height
@@ -20,12 +19,13 @@ class SettingScreenStyle {
           {double? fontSize,
           FontWeight? fontWeight,
           Color? color,
-          double? letterSpacing}) =>
+          double? letterSpacing,TextDecoration? textDecoration}) =>
       TextStyle(
           fontSize: AppScreenUtil().fontSize(fontSize!),
           fontFamily: GoogleFonts.poppins().fontFamily,
           fontWeight: fontWeight,
           letterSpacing: letterSpacing,
+          decoration: textDecoration,
           color: color);
 
   //login button COntainer

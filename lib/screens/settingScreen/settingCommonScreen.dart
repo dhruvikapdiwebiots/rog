@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
-import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
-import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
-import 'package:rog/screens/loginScreen/loginScreen_Style.dart';
 import 'package:rog/screens/settingScreen/SettingScreen_Style.dart';
 
 class SettingCommonScreen {
@@ -12,7 +9,8 @@ class SettingCommonScreen {
           TextAlign? textAlign,
           Color? color,
           FontWeight? fontWeight,
-          double? letterSpacing}) =>
+          double? letterSpacing,
+          TextDecoration? textDecoration}) =>
       Text(
         text,
         textAlign: textAlign,
@@ -20,13 +18,12 @@ class SettingCommonScreen {
             fontSize: fontSize,
             color: color,
             fontWeight: fontWeight,
-
+            textDecoration: textDecoration,
             letterSpacing: letterSpacing),
       );
 
   // SubmitButton
-  final submitButton =
-      ({GestureTapCallback? onTap}) => InkWell(
+  final submitButton = ({GestureTapCallback? onTap}) => InkWell(
       onTap: onTap,
       child: SettingScreenStyle().buttonContainerStyle(
         child: SettingScreenStyle().animatedContainer(
@@ -38,48 +35,49 @@ class SettingCommonScreen {
       ));
 
   //Inkwell Common
-  final iconInkWellCommon = (isEnable,{GestureTapCallback? onTap}) =>  InkWell(
+  final iconInkWellCommon = (isEnable, {GestureTapCallback? onTap}) => InkWell(
       onTap: onTap,
-      child: Icon(isEnable ?CupertinoIcons.pencil_ellipsis_rectangle :Icons.edit));
+      child: Icon(
+          isEnable ? CupertinoIcons.pencil_ellipsis_rectangle : Icons.edit));
 
   //commonLayout
-  final commonLayout = (title,isEnable,{Widget? textformfieldWidget,String? value,GestureTapCallback? onTap}) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: AppScreenUtil().size(5)),
-              child: SettingCommonScreen()
-                  .commonText(title, fontSize: 16),
+  final commonLayout = (title, isEnable,
+          {Widget? textformfieldWidget,
+          String? value,
+          GestureTapCallback? onTap}) =>
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SettingCommonScreen().commonText(
+                  title,
+                  fontSize: 16,
+                ),
+                SettingScreenStyle().specing(5),
+                isEnable
+                    ? textformfieldWidget!
+                    : Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScreenUtil().size(10),
+                        ),
+                        child: SettingCommonScreen()
+                            .commonText(value, fontSize: 14, textDecoration:  TextDecoration.underline),
+                      )
+              ],
             ),
-            SettingScreenStyle().specing(5),
-            isEnable ? textformfieldWidget! : Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: AppScreenUtil().size(10),
-                    horizontal: AppScreenUtil().size(15)),
-                child:  SettingCommonScreen().commonText(
-                    value,
-                    fontSize: 14),
-              ),
-            )
-          ],
-        ),
-      ),
-      SettingCommonScreen().iconInkWellCommon(
-        isEnable,
-          onTap: onTap
-      )
-    ],
-  );
+          ),
+          SettingCommonScreen().iconInkWellCommon(isEnable, onTap: onTap)
+        ],
+      );
 
   //main body ui design
-  final body = (BuildContext context,naemLayout,lastNameLayout,emailLayout,buttonLayout ) => SingleChildScrollView(
-    child: Column(
+  final body = (BuildContext context, naemLayout, lastNameLayout, emailLayout,
+          buttonLayout) =>
+      SingleChildScrollView(
+        child: Column(
           children: [
             naemLayout,
             SettingScreenStyle().specing(10),
@@ -88,8 +86,7 @@ class SettingCommonScreen {
             emailLayout,
             SettingScreenStyle().specing(50),
             buttonLayout
-
           ],
         ),
-  );
+      );
 }

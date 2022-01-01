@@ -4,7 +4,6 @@ import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 import 'package:rog/screens/groupCameraList/groupCameraCommonScreen.dart';
 import 'package:rog/screens/groupCameraList/groupCameraListCard.dart';
-import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 import 'package:rog/screens/groupCameraList/groupcameraList_controller.dart';
 
 class GroupCameraList extends StatefulWidget {
@@ -23,6 +22,26 @@ class _GroupCameraListState extends State<GroupCameraList> {
     //camera name
     final cameraNameLayout = GetBuilder<GroupCameraListController>(
       builder: (_) =>  GroupCameraCommonScreen().cameraNameLayout(groupCameraCtrl.name),
+    );
+
+    //listing layout
+    final listLayout = GetBuilder<GroupCameraListController>(
+      builder: (_) =>  Expanded(
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return GroupCameraListCard(
+              onTap: (){
+                var data = {
+                  'cameraName' :'Clubhouse Entrance Gate',
+                  'groupName': 'Cobalt Security Seabridge'
+                };
+                Get.toNamed(routeName.cameraCard,arguments: data);
+              },
+            );
+          },
+        ),
+      ),
     );
 
     return GetBuilder<GroupCameraListController>(
@@ -47,28 +66,7 @@ class _GroupCameraListState extends State<GroupCameraList> {
             title: GroupCameraCommonScreen().commonText(AppFont().cameragroups,fontSize: 18),
           ),
           body: Container(
-            child: Column(
-              children: [
-                cameraNameLayout,
-                GroupCameraScreenStyle().specing(10),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return GroupCameraListCard(
-                        onTap: (){
-                          var data = {
-                            'cameraName' :'Clubhouse Entrance Gate',
-                            'groupName': 'Cobalt Security Seabridge'
-                          };
-                          Get.toNamed(routeName.cameraCard,arguments: data);
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+            child: GroupCameraCommonScreen().body(context,cameraNameLayout,listLayout)
           ),
         ),
       ),

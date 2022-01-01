@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
-import 'package:rog/screens/loginScreen/loginScreen_Style.dart';
 
 class GroupCameraCommonScreen {
   // common Text Layout
@@ -46,7 +45,7 @@ class GroupCameraCommonScreen {
         children: [
           cameraNameLayout,
           GroupCameraScreenStyle().specing(10),
-          list,
+list
         ],
       );
 

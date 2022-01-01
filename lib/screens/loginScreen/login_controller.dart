@@ -85,6 +85,7 @@ class LoginController extends GetxController {
     }
   }
 
+  //get current user data
   getUserData() async {
     try {
       List requestData = [];
