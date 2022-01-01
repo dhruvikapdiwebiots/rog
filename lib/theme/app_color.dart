@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AppColor {
   final Color primaryColor = const Color(0xFF0F273D);
   final Color secondaryColor = const Color(0xFF404040);
-  final Color primarlightColor = const Color(0xFFDEE2E7);
+  final Color primarlightColor = const Color(0xFF154573);
+  final Color primarlightColor1 = const Color(0xFF12314E);
   final Color greenAccentColor = const Color(0XFF4CCDC6);
   final Color bgColor = const Color(0xFFFFFFFF);
   final Color textPrimaryColor = const Color(0xFF161616);
@@ -20,8 +21,11 @@ class AppColor {
   final Color lightGreyColor = const Color(0XFFCCCCCC);
   final Color dividerColor = Colors.grey;
   final Color gray = const Color(0xFF7C7C7C);
+  final Color darkGray = const Color(0xFF404040);
+  final Color grey = Colors.grey[500]!;
   final Color secondary = const Color(0xFFF5A313);
   final Color buttonTextColor = Colors.white;
+  final Color buttonColor = Color(0xFF5CD8B3);
   final Color inputBorder = const Color(0xFFE6E8EA);
   final Color lightSkyColor = const Color(0xFFD6FFFA);
   final Color lightOrangeColor = const Color(0xFFFFF5D9);
@@ -35,5 +39,7 @@ class AppColor {
   final liveScreenBackColor = const Color(0xFFE6E6E6);
   final activeInActiveColor = const Color(0xFFEBEBEB);
   final lineStyleColor = const Color(0xFF1B2F4A);
+  final selectItemColor = Color(0xFF5EC3B4);
+  final backgroundColor = Color(0xFFE9E9E9);
 
 }

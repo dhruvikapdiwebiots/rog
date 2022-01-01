@@ -1,16 +1,11 @@
 class IconAssets {
-  final String sensore = 'assets/icons/sensor.png';
-  final String comment = 'assets/icons/comment.png';
-  final String settings = 'assets/icons/setting.png';
-  final String user = 'assets/icons/user.png';
-  final String progressChart = 'assets/icons/progressChart.png';
-  final String skip = 'assets/icons/skip.png';
-  final String download = 'assets/icons/download.png';
-  final String downloadarrow = 'assets/icons/downloadarrow.png';
-  final String arrow5 = 'assets/icons/arrow5.png';
-  final String arrow4 = 'assets/icons/arrow4.png';
-  final String arrow3 = 'assets/icons/arrow3.png';
-  final String arrow2 = 'assets/icons/arrow2.png';
-  final String arrow1 = 'assets/icons/arrow1.png';
-  final String filter = 'assets/icons/filter.png';
+  final String securitycamera = 'assets/icons/security-camera_3.png';
+  final String users = 'assets/icons/users.png';
+  final String settings = 'assets/icons/settings.png';
+  final String bell = 'assets/icons/bell.png';
+  final String next = 'assets/icons/next.png';
+  final String view = 'assets/icons/view.png';
+  final String wifi = 'assets/icons/wifi.png';
+  final String shiled = 'assets/icons/shiled.png';
+  final String shield = 'assets/icons/shield.png';
 }

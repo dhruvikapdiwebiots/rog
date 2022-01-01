@@ -5,10 +5,9 @@ class SplashCommonScreen {
   //imageLayout
   final imageLayout = Image.asset(
     imageAssets.logo,
-    height: appScreenUtil.size(150),
-    width: appScreenUtil.size(180),
+    height: appScreenUtil.size(80),
+    width: appScreenUtil.size(80),
     fit: BoxFit.contain,
-    color: appColor.whiteColor,
   );
 
   // Speacing
@@ -19,7 +18,7 @@ class SplashCommonScreen {
   //alertText
 final alertText = Text(
   AppFont().alertLoading,
-  style: TextStyle(color: appColor.whiteColor),
+  style: TextStyle(color: appColor.whiteColor,fontSize: 18),
 );
 
 }
