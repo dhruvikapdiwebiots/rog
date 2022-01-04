@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen_Style.dart';
-import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
-import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
 
 class AlertAndNoteLayout extends StatelessWidget {
   String? image;

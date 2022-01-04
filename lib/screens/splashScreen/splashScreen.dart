@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rog/networking/index.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/splashScreen/splashCommonScreen.dart';
+import 'package:rog/utils/commonController.dart';
+import 'package:rog/utils/helper.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   AnimationController? _controller;
   Tween<double> _tween = Tween(begin: 0.55, end: 2);
+
 
   @override
   void initState() {
@@ -23,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(Duration(seconds: 3), () {
       checkLogin();
     });
+    getUserData();
     super.initState();
   }
 
@@ -40,6 +45,35 @@ class _SplashScreenState extends State<SplashScreen>
       Get.toNamed(routeName.dashboard);
     }else {
       Get.toNamed(routeName.loginScreen);
+    }
+  }
+
+  //get current user data
+  getUserData() async {
+    try {
+      List requestData = [];
+
+      bool isToken = await CommonController().checkTokenValidation();
+      if(isToken) {
+        print(requestData.toString());
+        var resData = await apis.apiCall(apiMethods.users, requestData, 'get');
+        print('status :${resData.statusCode}');
+        if (resData.statusCode == 200) {
+          var data = resData.body;
+          print('data : $data');
+          await Helper().writeStorage('userData', data);
+          setState(() {
+
+          });
+        } else {
+          print('Error while getting userData');
+        }
+      }else{
+        Get.offAllNamed(routeName.loginScreen);
+      }
+    } catch (e) {
+
+      print(e);
     }
   }
 

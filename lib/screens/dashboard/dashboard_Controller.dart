@@ -22,6 +22,7 @@ class DashboardController extends GetxController {
     SettingScreen()
   ];
 
+  //on back from different page take it to last visit page
   onBack() async {
     int index = await Helper().getStorage('selectedIndex');
     selectedIndex = index;

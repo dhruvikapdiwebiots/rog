@@ -18,7 +18,7 @@ class SplashCommonScreen {
   //alertText
 final alertText = Text(
   AppFont().alertLoading,
-  style: TextStyle(color: appColor.whiteColor,fontSize: 18),
+  style: TextStyle(color: appColor.whiteColor,fontSize: AppScreenUtil().fontSize(18)),
 );
 
 }

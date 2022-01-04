@@ -1,11 +1,10 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/material.dart';
 import 'package:rog/networking/index.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 import 'package:rog/utils/commonController.dart';
 import 'package:rog/utils/helper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SettingController extends GetxController {
   String name = '';
@@ -25,6 +24,7 @@ class SettingController extends GetxController {
     super.onInit();
   }
 
+  //get user data  from storage
   getData() async {
     dynamic userData = await Helper().getStorage('userData');
     controller.text = userData['first_name'];
@@ -33,16 +33,19 @@ class SettingController extends GetxController {
     update();
   }
 
+  //isName is true or false
   isNameEdit() {
     isEnable = !isEnable;
     update();
   }
 
+  //is last Name is true or false
   isLastNameEdit() {
     isLastNameEnable = !isLastNameEnable;
     update();
   }
 
+  //update userdata
   updateData() async {
     isLoading = true;
     update();
