@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rog/packages/config_package.dart';
 
 class DashboardScreenStyle {
-
   // Speacing Width
   final specingWidth = (data) => SizedBox(
         width: AppScreenUtil().size(data),
@@ -12,10 +11,12 @@ class DashboardScreenStyle {
   //text STyle
   final titleStyle = (selectedIndex) => Text(
         selectedIndex == 0
-            ? AppFont().mycameragroups : selectedIndex == 1 ? AppFont().connect
-            : selectedIndex == 2
-                ? AppFont().alert
-                : AppFont().loginSecurity,
+            ? AppFont().mycameragroups
+            : selectedIndex == 1
+                ? AppFont().connect
+                : selectedIndex == 2
+                    ? AppFont().alert
+                    : AppFont().loginSecurity,
         style: new TextStyle(
             fontFamily: GoogleFonts.poppins().fontFamily,
             fontSize: AppScreenUtil().fontSize(18.0),
@@ -39,10 +40,10 @@ class DashboardScreenStyle {
       ]);
 
 //menu Icon Style
-  final menuiconStyl =(icon)=> Icon(
-    icon,
-    color: appColor.whiteColor,
-  );
+  final menuiconStyl = (icon) => Icon(
+        icon,
+        color: appColor.whiteColor,
+      );
 
   //container box decoration for completedexercise and training
   final boxDecoration = (
@@ -77,7 +78,10 @@ class DashboardScreenStyle {
       );
 
   //appbar style
-  final appBarStyle = (context, selectedIndex,{GestureTapCallback? onTapPushNotification, GestureTapCallback? onBack}) => PreferredSize(
+  final appBarStyle = (context, selectedIndex,
+          {GestureTapCallback? onTapPushNotification,
+          GestureTapCallback? onBack}) =>
+      PreferredSize(
         child: new Container(
           padding: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: new Padding(
@@ -90,26 +94,23 @@ class DashboardScreenStyle {
               children: [
                 Row(
                   children: [
-                    selectedIndex == 0 ?InkWell(
-                      onTap: () {
-                        Alertbox().alertLogout(context);
-                      },
-                      child: DashboardScreenStyle().menuiconStyl(Icons.menu),
-                    ) : InkWell(
-                      onTap: onBack,
-                      child: DashboardScreenStyle().menuiconStyl(Icons.arrow_back),
-                    ) ,
+                    selectedIndex == 0
+                        ? InkWell(
+                            onTap: () {
+                              Alertbox().alertLogout(context);
+                            },
+                            child:
+                                DashboardScreenStyle().menuiconStyl(Icons.menu),
+                          )
+                        : InkWell(
+                            onTap: onBack,
+                            child: DashboardScreenStyle()
+                                .menuiconStyl(Icons.arrow_back),
+                          ),
                     DashboardScreenStyle().specingWidth(15),
                     DashboardScreenStyle().titleStyle(selectedIndex),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: AppScreenUtil().size(15)),
-                  child: InkWell(
-                      onTap: onTapPushNotification,
-                      child: Icon(Icons.notifications_active, color: appColor.whiteColor,)),
-                ),
-                
               ],
             ),
           ),

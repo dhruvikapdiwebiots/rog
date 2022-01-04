@@ -23,21 +23,16 @@ class _DashboardState extends State<Dashboard> {
           return new Future(() => false);
         },
         child: Scaffold(
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: appColor.primaryColor,
-              boxShadow: [
-                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
-              ],
-            ),
-            child: BottomNavigatorCard(
-              selectedIndex: dashboardCtrl.selectedIndex,
-              onTap: (index) => dashboardCtrl.navigationbarchange(index),
-            ),
+          bottomNavigationBar: BottomNavigatorCard(
+            selectedIndex: dashboardCtrl.selectedIndex,
+            onTap: (index) => dashboardCtrl.navigationbarchange(index),
           ),
-          appBar: DashboardScreenStyle().appBarStyle(context,dashboardCtrl.selectedIndex,
-          onBack: dashboardCtrl.onBack,
-          onTapPushNotification: () => dashboardCtrl.commonController.sendNotification(title: 'This is the Title',msg: 'This is the message')),
+          appBar: DashboardScreenStyle().appBarStyle(
+              context, dashboardCtrl.selectedIndex,
+              onBack: dashboardCtrl.onBack,
+              onTapPushNotification: () => dashboardCtrl.commonController
+                  .sendNotification(
+                      title: 'This is the Title', msg: 'This is the message')),
           body: dashboardCtrl.widgetOptions
               .elementAt(dashboardCtrl.selectedIndex),
         ),

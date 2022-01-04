@@ -1,4 +1,3 @@
-
 class AppFont {
   String userName = "Username";
   String hintuserName = "Email";
@@ -32,7 +31,8 @@ class AppFont {
   String forgotPassword = 'Forgot Password?';
   String licenceAgreement = 'license Agreement';
   String privacyStatment = 'Privacy Statement';
-  String instructionForPassword = "Enter the email associated with your account and we'll send an email with link to reset your password";
+  String instructionForPassword =
+      "Enter the email associated with your account and we'll send an email with link to reset your password";
   String checkMail = "Check your email";
   String checkMailMessage = "We have sent a link to your email";
   String groups = "Groups";
@@ -45,9 +45,9 @@ class AppFont {
   String noInternet = "No Internet Connection";
   String wentWrong = "Something went wrong. Try again after some time";
   String addNote = "Add Note (coming soon)";
-  String name = "First Name :";
+  String name = "Name";
   String lastname = "Last Name :";
-  String email = "Email :";
+  String email = "Email";
   String connect = "Connect";
-
+  String edit = "Edit";
 }

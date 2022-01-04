@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
-import 'package:rog/screens/settingScreen/SettingScreen_Style.dart';
 import 'package:rog/screens/settingScreen/settingCommonScreen.dart';
 import 'package:rog/screens/settingScreen/setting_controller.dart';
 import 'package:rog/utils/loading_component.dart';
@@ -31,44 +30,31 @@ class _SettingScreenState extends State<SettingScreen> {
               settingCtrl.isNameEdit();
             }));
 
-    //Lastname Layout
-    final lastNameLayout = GetBuilder<SettingController>(
-        builder: (_) =>
-            SettingCommonScreen().commonLayout(AppFont().lastname,settingCtrl.isLastNameEnable,
-                textformfieldWidget: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    controller: settingCtrl.lastNameController,
-                  ),
-                ),
-                value: settingCtrl.dashboardCtrl.lastname, onTap: () {
-              print('tap');
-              settingCtrl.isLastNameEdit();
-            }));
 
     //email Layout
     final emailLayout = GetBuilder<SettingController>(
         builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SettingCommonScreen()
-                        .commonText(AppFont().email, fontSize: 16),
-                    SettingScreenStyle().specingWidth(10),
-                    Card(
-                      child: Padding(
+                SettingCommonScreen()
+                    .commonText(AppFont().email, fontSize: 16,color: appColor.grey),
+                SettingScreenStyle().specingWidth(55),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: AppScreenUtil().size(10),
-                            horizontal: AppScreenUtil().size(15)),
-                        child: SettingCommonScreen().commonText(
-                          settingCtrl.dashboardCtrl.email,
-                          fontSize: 14,
+                          vertical: AppScreenUtil().size(10),
                         ),
+                        child: SettingCommonScreen().commonText(
+                            settingCtrl.dashboardCtrl.email,
+                            fontSize: 14,
+                            textDecoration: TextDecoration.underline),
                       ),
-                    )
-                  ],
+                      Container()
+                    ],
+                  ),
                 ),
               ],
             ));
@@ -84,14 +70,16 @@ class _SettingScreenState extends State<SettingScreen> {
     return GetBuilder<SettingController>(
       builder: (_) => Scaffold(
         body: SingleChildScrollView(
-          child: settingCtrl.isLoading ?  LoadingComponent() : Container(
-            height: MediaQuery.of(context).size.height,
-            margin: EdgeInsets.symmetric(
-                vertical: AppScreenUtil().size(25),
-                horizontal: AppScreenUtil().size(20)),
-            child: SettingCommonScreen().body(
-                context, naemLayout, lastNameLayout, emailLayout, buttonLayout),
-          ),
+          child: settingCtrl.isLoading
+              ? LoadingComponent()
+              : Container(
+                  height: MediaQuery.of(context).size.height,
+                  margin: EdgeInsets.symmetric(
+                      vertical: AppScreenUtil().size(25),
+                      horizontal: AppScreenUtil().size(20)),
+                  child: SettingCommonScreen().body(context, naemLayout,
+                      emailLayout, buttonLayout),
+                ),
         ),
       ),
     );

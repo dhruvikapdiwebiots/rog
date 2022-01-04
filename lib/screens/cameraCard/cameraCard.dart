@@ -7,6 +7,7 @@ import 'package:rog/screens/cameraCard/cameraCard_controller.dart';
 import 'package:rog/screens/cameraCard/viewandalertLayout.dart';
 import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
+import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({Key? key}) : super(key: key);
@@ -38,35 +39,38 @@ class _CameraCardState extends State<CameraCard> {
       alignment: Alignment.bottomCenter,
       children: [
         CameraCardCommonScreen().imageLayout(context, imageAssets.house2),
-       CameraCardScreenStyle().viewLiveAndAlertStyle(
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             ViewAndAlertLayout(
-               image: iconAssets.view,
-               text: AppFont().viewLive,
-             ),
-             ViewAndAlertLayout(
-               image: iconAssets.wifi,
-               text: AppFont().alertGroup,
-             )
-           ],
-         ),
-       )
+        CameraCardScreenStyle().viewLiveAndAlertStyle(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ViewAndAlertLayout(
+                image: iconAssets.view,
+                text: AppFont().viewLive,
+              ),
+              ViewAndAlertLayout(
+                image: iconAssets.wifi,
+                text: AppFont().alertGroup,
+              )
+            ],
+          ),
+        )
       ],
     );
 
     //time date display layout
     final timeDateDisplay = Container(
-     child: Column(
-       children: [
-         CameraCardCommonScreen().commonText(AppFont().lastImageReceived,fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('11/30/2021',fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('04:53:01 Pm PST',fontSize: 16,color: appColor.grey),
-       ],
-     ),
+      child: Column(
+        children: [
+          CameraCardCommonScreen().commonText(AppFont().lastImageReceived,
+              fontSize: 16, color: appColor.grey),
+          CameraCardScreenStyle().specing(8),
+          CameraCardCommonScreen()
+              .commonText('11/30/2021', fontSize: 16, color: appColor.grey),
+          CameraCardScreenStyle().specing(8),
+          CameraCardCommonScreen().commonText('04:53:01 Pm PST',
+              fontSize: 16, color: appColor.grey),
+        ],
+      ),
     );
 
     return GetBuilder<CameraCardController>(
@@ -84,16 +88,15 @@ class _CameraCardState extends State<CameraCard> {
               onTap: (index) {
                 Get.back();
                 Get.back();
-                controller.navigationbarchange(index);},
+                controller.navigationbarchange(index);
+              },
             ),
           ),
-          appBar: AppBar(
-            title: CameraCardCommonScreen()
-                .commonText(AppFont().cameraView, fontSize: 18),
-          ),
+          appBar: GroupCameraScreenStyle()
+              .appBarStyle(context, onBack: () => Get.back),
           body: Container(
             child: CameraCardCommonScreen()
-                .body(context, cameraNameLayout, imageLayout,timeDateDisplay),
+                .body(context, cameraNameLayout, imageLayout, timeDateDisplay),
           ),
         ),
       ),
