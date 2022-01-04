@@ -15,22 +15,18 @@ class AlertCard extends StatelessWidget {
       child: Card(
         elevation: 5,
         child: Padding(
-          padding:
-          EdgeInsets.symmetric(vertical: AppScreenUtil().size(5)),
+          padding: EdgeInsets.symmetric(vertical: AppScreenUtil().size(5)),
           child: Column(
             children: [
               AlertCommonScreen().commonText('ClubHouse Entrance Gate',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: .5),
+                  fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: .5),
               AlertCommonScreen().commonText('Cobalt Security Seabridge',
                   fontSize: 14, letterSpacing: .5),
               AlertsScreenStyle().specing(5),
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  AlertCommonScreen()
-                      .imageLayout(context, imageAssets.house2),
+                  AlertCommonScreen().imageLayout(context, imageAssets.house2),
                   LiveViewLayout(),
                   AlertsScreenStyle().viewLiveAndAlertStyle(
                     Colors.black87.withOpacity(.8),
