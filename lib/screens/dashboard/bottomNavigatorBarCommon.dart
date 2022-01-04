@@ -10,7 +10,7 @@ class BottomNavigatorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-
+      type: BottomNavigationBarType.fixed,
       selectedFontSize: AppScreenUtil().fontSize(20),
       unselectedItemColor: appColor.grey,
       backgroundColor: appColor.primaryColor,

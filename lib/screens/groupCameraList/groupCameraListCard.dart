@@ -5,7 +5,8 @@ import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 
 class GroupCameraListCard extends StatelessWidget {
   GestureTapCallback? onTap;
-  GroupCameraListCard({Key? key,this.onTap}) : super(key: key);
+  var data;
+  GroupCameraListCard({Key? key,this.onTap,this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,11 @@ class GroupCameraListCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GroupCameraCommonScreen()
-                        .imageLayout(imageAssets.house, 100, 100),
+                        .imageLayout(data['thumbnail_url'], 100, 100),
                     GroupCameraScreenStyle().specingWidth(20),
                     Expanded(
                         child: GroupCameraCommonScreen().commonText(
-                      'Cobalt Security Seabridge',
+                      data['name'],
                       textAlign: TextAlign.start,
                       fontSize: 16,
                     )),

@@ -3,15 +3,16 @@ import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 import 'package:rog/screens/loginScreen/loginScreen_Style.dart';
+import 'package:rog/utils/custom_cached_network_image.dart';
 
 class CameraCardCommonScreen {
   // common Text Layout
   final commonText = (text,
-          {double? fontSize,
-          TextAlign? textAlign,
-          Color? color,
-          FontWeight? fontWeight,
-          double? letterSpacing}) =>
+      {double? fontSize,
+        TextAlign? textAlign,
+        Color? color,
+        FontWeight? fontWeight,
+        double? letterSpacing}) =>
       Text(
         text,
         textAlign: textAlign,
@@ -22,25 +23,37 @@ class CameraCardCommonScreen {
             letterSpacing: letterSpacing),
       );
 
-  //imageLayout
-  final imageLayout = (
-    context,
-    image,
-  ) =>
-      Image.asset(
-        image,
-        width: MediaQuery.of(context).size.width,
-        height: AppScreenUtil().size(420),
-        fit: BoxFit.fill,
-      );
+
 
   //camera name Layout
   final cameraNameLayout = (text) => GroupCameraScreenStyle().cameraNameStyle(
       child: CameraCardCommonScreen().commonText(text, fontSize: 16));
 
+  //menu Icon Style
+  final menuiconStyl = (icon) => Icon(
+    icon,
+    color: appColor.whiteColor,
+  );
+
+  //imageLayout
+  final imageLayout = (
+      context,
+      image,
+      ) =>
+
+      CustomCachedNetworkImage(
+        url: image,
+        width: MediaQuery.of(context).size.width,
+        height: AppScreenUtil().size(420),
+        fit: BoxFit.fill,
+        errorLocalPath: imageAssets.cameraNote,
+      );
+
   //main body ui design
-  final body = (BuildContext context, cameraNameLayout, imageLayout,timeDateDisplay) => SingleChildScrollView(
-    child: Column(
+  final body =
+      (BuildContext context, cameraNameLayout, imageLayout, timeDateDisplay) =>
+      SingleChildScrollView(
+        child: Column(
           children: [
             cameraNameLayout,
             CameraCardScreenStyle().colorSpace,
@@ -49,5 +62,5 @@ class CameraCardCommonScreen {
             timeDateDisplay
           ],
         ),
-  );
+      );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
 import 'package:rog/screens/cameragroup/cameragroup.dart';
 import 'package:rog/screens/connect/connect.dart';

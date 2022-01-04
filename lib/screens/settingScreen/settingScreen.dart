@@ -32,42 +32,31 @@ class _SettingScreenState extends State<SettingScreen> {
               settingCtrl.isNameEdit();
             }));
 
-    //Lastname Layout
-    final lastNameLayout = GetBuilder<SettingController>(
-        builder: (_) => SettingCommonScreen()
-                .commonLayout(AppFont().lastname, settingCtrl.isLastNameEnable,
-                    textformfieldWidget: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        controller: settingCtrl.lastNameController,
-                      ),
-                    ),
-                    value: settingCtrl.dashboardCtrl.lastname, onTap: () {
-              print('tap');
-              settingCtrl.isLastNameEdit();
-            }));
 
     //email Layout
     final emailLayout = GetBuilder<SettingController>(
         builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SettingCommonScreen()
-                        .commonText(AppFont().email, fontSize: 16),
-                    SettingScreenStyle().specingWidth(10),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: AppScreenUtil().size(10),
+                SettingCommonScreen()
+                    .commonText(AppFont().email, fontSize: 16,color: appColor.grey),
+                SettingScreenStyle().specingWidth(55),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScreenUtil().size(10),
+                        ),
+                        child: SettingCommonScreen().commonText(
+                            settingCtrl.dashboardCtrl.email,
+                            fontSize: 14,
+                            textDecoration: TextDecoration.underline),
                       ),
-                      child: SettingCommonScreen().commonText(
-                          settingCtrl.dashboardCtrl.email,
-                          fontSize: 14,
-                          textDecoration: TextDecoration.underline),
-                    )
-                  ],
+                      Container()
+                    ],
+                  ),
                 ),
               ],
             ));
@@ -91,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       vertical: AppScreenUtil().size(25),
                       horizontal: AppScreenUtil().size(20)),
                   child: SettingCommonScreen().body(context, naemLayout,
-                      lastNameLayout, emailLayout, buttonLayout),
+                      emailLayout, buttonLayout),
                 ),
         ),
       ),

@@ -9,11 +9,8 @@ class CameraGroupScreenStyle {
       );
 
   //icon Style
-final cameraIconStyle =  Container(
-  alignment: Alignment.topRight,
-  child: Image.asset(
-    iconAssets.securitycamera,
-    height: AppScreenUtil().size(20),
-  ),
+final cameraIconStyle =  Image.asset(
+  iconAssets.securitycamera,
+  height: AppScreenUtil().size(25),
 );
 }

@@ -4,6 +4,8 @@ import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertCard.dart';
 import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
+import 'package:rog/utils/loading_component.dart';
+import 'package:rog/utils/shimmer.dart';
 
 class AlertsScreen extends StatefulWidget {
   const AlertsScreen({Key? key}) : super(key: key);
@@ -19,12 +21,20 @@ class _AlertsScreenState extends State<AlertsScreen> {
   Widget build(BuildContext context) {
     //listing layout
     final listLayout = GetBuilder<AlertScreenController>(
-      builder: (_) => ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return AlertCard();
-        },
-      ),
+      builder: (_) => alertCtrl.isLoading
+          ? ShimmerCardProfileSkeleton(
+        isBottomLinesActive: false,
+      )
+          : alertCtrl.data != null
+              ? ListView.builder(
+                  itemCount: alertCtrl.data.length,
+                  itemBuilder: (context, index) {
+                    return AlertCard(
+                      data: alertCtrl.data[index],
+                    );
+                  },
+                )
+              : Container(),
     );
 
     return GetBuilder<AlertScreenController>(

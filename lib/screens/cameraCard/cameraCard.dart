@@ -34,39 +34,55 @@ class _CameraCardState extends State<CameraCard> {
     );
 
     //image layout
-    final imageLayout = Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        CameraCardCommonScreen().imageLayout(context, imageAssets.house2),
-       CameraCardScreenStyle().viewLiveAndAlertStyle(
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             ViewAndAlertLayout(
-               image: iconAssets.view,
-               text: AppFont().viewLive,
-             ),
-             ViewAndAlertLayout(
-               image: iconAssets.wifi,
-               text: AppFont().alertGroup,
-             )
-           ],
-         ),
-       )
-      ],
+    final imageLayout = GetBuilder<CameraCardController>(
+      builder: (_) => cameraCardCtrl.data != null
+          ? Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                CameraCardCommonScreen()
+                    .imageLayout(context, cameraCardCtrl.data['thumbnail_url']),
+                CameraCardScreenStyle().viewLiveAndAlertStyle(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ViewAndAlertLayout(
+                        image: iconAssets.view,
+                        text: AppFont().viewLive,
+                      ),
+                      ViewAndAlertLayout(
+                        image: iconAssets.wifi,
+                        text: AppFont().alertGroup,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )
+          : Container(),
     );
 
     //time date display layout
-    final timeDateDisplay = Container(
-     child: Column(
-       children: [
-         CameraCardCommonScreen().commonText(AppFont().lastImageReceived,fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('11/30/2021',fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('04:53:01 Pm PST',fontSize: 16,color: appColor.grey),
-       ],
-     ),
+    final timeDateDisplay = GetBuilder<CameraCardController>(
+      builder: (_) => cameraCardCtrl.data != null
+          ? Container(
+              child: Column(
+                children: [
+                  CameraCardCommonScreen().commonText(
+                      AppFont().lastImageReceived,
+                      fontSize: 16,
+                      color: appColor.grey),
+                  CameraCardScreenStyle().specing(8),
+                  CameraCardCommonScreen().commonText(cameraCardCtrl.date,
+                      fontSize: 16, color: appColor.grey),
+                  CameraCardScreenStyle().specing(8),
+                  CameraCardCommonScreen().commonText(
+                      '${cameraCardCtrl.time} PST',
+                      fontSize: 16,
+                      color: appColor.grey),
+                ],
+              ),
+            )
+          : Container(),
     );
 
     return GetBuilder<CameraCardController>(
@@ -84,16 +100,15 @@ class _CameraCardState extends State<CameraCard> {
               onTap: (index) {
                 Get.back();
                 Get.back();
-                controller.navigationbarchange(index);},
+                controller.navigationbarchange(index);
+              },
             ),
           ),
-          appBar: AppBar(
-            title: CameraCardCommonScreen()
-                .commonText(AppFont().cameraView, fontSize: 18),
-          ),
+          appBar: CameraCardScreenStyle()
+              .appBarStyle(context, onBack: () => Get.back()),
           body: Container(
             child: CameraCardCommonScreen()
-                .body(context, cameraNameLayout, imageLayout,timeDateDisplay),
+                .body(context, cameraNameLayout, imageLayout, timeDateDisplay),
           ),
         ),
       ),
