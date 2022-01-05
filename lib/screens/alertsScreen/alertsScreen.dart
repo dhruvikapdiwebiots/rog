@@ -23,8 +23,8 @@ class _AlertsScreenState extends State<AlertsScreen> {
     final listLayout = GetBuilder<AlertScreenController>(
       builder: (_) => alertCtrl.isLoading
           ? ShimmerCardProfileSkeleton(
-        isBottomLinesActive: false,
-      )
+              isBottomLinesActive: false,
+            )
           : alertCtrl.data != null
               ? ListView.builder(
                   itemCount: alertCtrl.data.length,
@@ -39,6 +39,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
 
     return GetBuilder<AlertScreenController>(
         builder: (_) => Scaffold(
+              backgroundColor: appColor.backgroundColor,
               body: Container(
                 margin: EdgeInsets.all(AppScreenUtil().size(10)),
                 child: AlertCommonScreen().body(

@@ -8,24 +8,22 @@ import 'package:rog/screens/alertsScreen/liveViewLayout.dart';
 
 class AlertCard extends StatelessWidget {
   var data;
-  AlertCard({Key? key,this.data}) : super(key: key);
+  AlertCard({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String createdDate = DateFormat('MM/dd/yyyy hh:mm a').format(DateTime.parse(data["updated_at"]));
+    String createdDate = DateFormat('MM/dd/yyyy hh:mm a')
+        .format(DateTime.parse(data["updated_at"]));
     return Container(
       margin: EdgeInsets.only(bottom: AppScreenUtil().size(10)),
       child: Card(
         elevation: 5,
         child: Padding(
-          padding:
-          EdgeInsets.symmetric(vertical: AppScreenUtil().size(5)),
+          padding: EdgeInsets.symmetric(vertical: AppScreenUtil().size(5)),
           child: Column(
             children: [
               AlertCommonScreen().commonText(data['camera_groups_name'],
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: .5),
+                  fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: .5),
               AlertCommonScreen().commonText(data['cameras_name'],
                   fontSize: 14, letterSpacing: .5),
               AlertsScreenStyle().specing(5),
@@ -36,17 +34,25 @@ class AlertCard extends StatelessWidget {
                       .imageLayout(context, data['alert_image_url']),
                   LiveViewLayout(),
                   AlertsScreenStyle().viewLiveAndAlertStyle(
-                    Colors.black87.withOpacity(.8),
+                    Colors.black87.withOpacity(.7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AlertAndNoteLayout(
-                          image: iconAssets.wifi,
-                          text: AppFont().alertGroup,
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: AppScreenUtil().size(25)),
+                          child: AlertAndNoteLayout(
+                            image: iconAssets.wifi,
+                            text: AppFont().alertGroup,
+                          ),
                         ),
-                        AlertAndNoteLayout(
-                          image: iconAssets.shiled,
-                          text: AppFont().addNote,
+                        Padding(
+                          padding:
+                              EdgeInsets.only(right: AppScreenUtil().size(10)),
+                          child: AlertAndNoteLayout(
+                            image: iconAssets.shiled,
+                            text: AppFont().addNote,
+                          ),
                         )
                       ],
                     ),
@@ -54,9 +60,8 @@ class AlertCard extends StatelessWidget {
                 ],
               ),
               AlertsScreenStyle().specing(15),
-              AlertCommonScreen().commonText(
-                  'Alert : ${createdDate} (PST)',
-                  fontSize: 14)
+              AlertCommonScreen()
+                  .commonText('Alert : $createdDate (PST)', fontSize: 14)
             ],
           ),
         ),

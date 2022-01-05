@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>153344187169-1q1qe506atl1l0d8kvqap3c2i69ft3ue.apps.googleusercontent.com</string>
+	<string>153344187169-mck0b90uq10tofdvu746g3bgp9mqr21h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.153344187169-1q1qe506atl1l0d8kvqap3c2i69ft3ue</string>
+	<string>com.googleusercontent.apps.153344187169-mck0b90uq10tofdvu746g3bgp9mqr21h</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>153344187169-ht6u2aui22qfg44vpt3808t7k08omcs5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>co.cpaicua.marathonkids-2.0</string>
+	<string>co.capicua.marathonkids-2.0</string>
 	<key>PROJECT_ID</key>
 	<string>rog-2-0</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:153344187169:ios:1de5650249a4c74e643c60</string>
+	<string>1:153344187169:ios:ddf3d5aa186e01a0643c60</string>
 	<key>DATABASE_URL</key>
 	<string>https://rog-2-0.firebaseio.com</string>
 </dict>

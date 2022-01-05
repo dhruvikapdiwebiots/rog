@@ -25,11 +25,10 @@ class CameraGroupCard extends StatelessWidget {
                 CameraGroupScreenStyle().cameraIconStyle,
                 CameraGroupScreenStyle().specingWidth(15),
                 Expanded(
-                  child: CameraGroupCommonScreen().commonText(
-                    data['name'],
-                    textAlign: TextAlign.center,
-                    fontSize: 18,
-                  ),
+                  child: CameraGroupCommonScreen().commonText(data['name'],
+                      textAlign: TextAlign.center,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
                 )
               ],
             ),

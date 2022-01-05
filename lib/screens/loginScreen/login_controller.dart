@@ -116,24 +116,22 @@ class LoginController extends GetxController {
     var token = await FirebaseMessaging.instance.getToken();
     dynamic userData = await Helper().getStorage('userData');
     print('userData : $userData');
+    String uuid = userData['uuid'];
 
-    /*users
-        .doc(userData['userId'])
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        users
-            .doc(userData['userId'])
-            .update({'fcmToken': token})
-            .then((value) => print("User Updated"))
-            .catchError((error) => print("Failed to update user: $error"));
-      } else {
-        users
-            .add({'userId': userData['userId'], 'fcmToken': token})
-            .then((value) => print("User Added"))
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-    });*/
+    DocumentReference documentReferencer =
+        uuid == "" ? users.doc() : users.doc(uuid);
+    Map<String, dynamic> data = <String, dynamic>{
+      "fcmToken": token,
+    };
+    uuid == ""
+        ? await documentReferencer
+            .set(data)
+            .whenComplete(() => print('Done'))
+            .catchError((e) => print(e))
+        : await documentReferencer
+            .update(data)
+            .whenComplete(() => print('Update Done'))
+            .catchError((e) => print(e));
   }
 
   //forgot password api

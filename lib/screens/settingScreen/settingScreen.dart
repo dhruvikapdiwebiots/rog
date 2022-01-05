@@ -32,14 +32,13 @@ class _SettingScreenState extends State<SettingScreen> {
               settingCtrl.isNameEdit();
             }));
 
-
     //email Layout
     final emailLayout = GetBuilder<SettingController>(
         builder: (_) => Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SettingCommonScreen()
-                    .commonText(AppFont().email, fontSize: 16,color: appColor.grey),
+                SettingCommonScreen().commonText(AppFont().email,
+                    fontSize: 16, color: appColor.grey),
                 SettingScreenStyle().specingWidth(55),
                 Expanded(
                   child: Row(
@@ -52,7 +51,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         child: SettingCommonScreen().commonText(
                             settingCtrl.dashboardCtrl.email,
                             fontSize: 14,
-                            textDecoration: TextDecoration.underline),
+                            textDecoration: TextDecoration.none),
                       ),
                       Container()
                     ],
@@ -71,18 +70,18 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return GetBuilder<SettingController>(
       builder: (_) => Scaffold(
-        body: SingleChildScrollView(
-          child: settingCtrl.isLoading
-              ? LoadingComponent()
-              : Container(
-                  height: MediaQuery.of(context).size.height,
-                  margin: EdgeInsets.symmetric(
-                      vertical: AppScreenUtil().size(25),
-                      horizontal: AppScreenUtil().size(20)),
-                  child: SettingCommonScreen().body(context, naemLayout,
-                      emailLayout, buttonLayout),
-                ),
-        ),
+        body: settingCtrl.isLoading
+            ? LoadingComponent()
+            : Container(
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.only(
+                    top: AppScreenUtil().size(40),
+                    left: AppScreenUtil().size(20),
+                    right: AppScreenUtil().size(20),
+                    bottom: AppScreenUtil().size(100)),
+                child: SettingCommonScreen()
+                    .body(context, naemLayout, emailLayout, buttonLayout),
+              ),
       ),
     );
   }

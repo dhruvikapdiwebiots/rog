@@ -19,7 +19,7 @@ class ViewAndAlertLayout extends StatelessWidget {
         ),
         CameraCardScreenStyle().specing(5),
         CameraCardCommonScreen().commonText(text,
-            fontSize: 12, letterSpacing: .5, color: appColor.whiteColor)
+            fontSize: 10, letterSpacing: .3, color: appColor.whiteColor)
       ],
     );
   }

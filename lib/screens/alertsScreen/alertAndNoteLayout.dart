@@ -19,7 +19,7 @@ class AlertAndNoteLayout extends StatelessWidget {
         ),
         AlertsScreenStyle().specing(5),
         AlertCommonScreen().commonText(text,
-            fontSize: 12, letterSpacing: .5, color: appColor.whiteColor)
+            fontSize: 10, letterSpacing: .5, color: appColor.whiteColor)
       ],
     );
   }

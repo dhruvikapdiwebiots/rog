@@ -40,8 +40,12 @@ class SettingCommonScreen {
       child: Column(
         children: [
           Icon(
-              isEnable ? CupertinoIcons.pencil_ellipsis_rectangle : Icons.edit,color: appColor.buttonColor,size: AppScreenUtil().size(20),),
-          SettingCommonScreen().commonText(AppFont().edit,fontSize: 12,color: appColor.buttonColor)
+            isEnable ? CupertinoIcons.pencil_ellipsis_rectangle : Icons.edit,
+            color: appColor.buttonColor,
+            size: AppScreenUtil().size(20),
+          ),
+          SettingCommonScreen().commonText(AppFont().edit,
+              fontSize: 12, color: appColor.buttonColor)
         ],
       ));
 
@@ -53,10 +57,8 @@ class SettingCommonScreen {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SettingCommonScreen().commonText(
-            title,
-            fontSize: 16,color: appColor.grey
-          ),
+          SettingCommonScreen()
+              .commonText(title, fontSize: 16, color: appColor.grey),
           SettingScreenStyle().specingWidth(50),
           Expanded(
             child: Row(
@@ -65,12 +67,16 @@ class SettingCommonScreen {
                 isEnable
                     ? Expanded(child: textformfieldWidget!)
                     : Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: AppScreenUtil().size(10),
-                  ),
-                  child: SettingCommonScreen()
-                      .commonText(value, fontSize: 14, textDecoration:  TextDecoration.underline, textAlign: TextAlign.start,),
-                ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScreenUtil().size(10),
+                        ),
+                        child: SettingCommonScreen().commonText(
+                          value,
+                          fontSize: 14,
+                          textDecoration: TextDecoration.none,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
                 SettingCommonScreen().iconInkWellCommon(isEnable, onTap: onTap)
               ],
             ),
@@ -79,17 +85,20 @@ class SettingCommonScreen {
       );
 
   //main body ui design
-  final body = (BuildContext context, naemLayout, emailLayout,
-          buttonLayout) =>
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            naemLayout,
-            SettingScreenStyle().specing(10),
-            emailLayout,
-            SettingScreenStyle().specing(50),
-            buttonLayout
-          ],
-        ),
-      );
+  final body =
+      (BuildContext context, naemLayout, emailLayout, buttonLayout) => Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Column(
+                children: [
+                  SettingScreenStyle().specing(20),
+                  naemLayout,
+                  SettingScreenStyle().specing(35),
+                  emailLayout,
+                  SettingScreenStyle().specing(50),
+                ],
+              ),
+              buttonLayout
+            ],
+          );
 }

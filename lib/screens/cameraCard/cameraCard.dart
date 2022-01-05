@@ -45,13 +45,21 @@ class _CameraCardState extends State<CameraCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ViewAndAlertLayout(
-                        image: iconAssets.view,
-                        text: AppFont().viewLive,
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: AppScreenUtil().size(10)),
+                        child: ViewAndAlertLayout(
+                          image: iconAssets.view,
+                          text: AppFont().viewLive,
+                        ),
                       ),
-                      ViewAndAlertLayout(
-                        image: iconAssets.wifi,
-                        text: AppFont().alertGroup,
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: AppScreenUtil().size(25)),
+                        child: ViewAndAlertLayout(
+                          image: iconAssets.wifi,
+                          text: AppFont().alertGroup,
+                        ),
                       )
                     ],
                   ),
