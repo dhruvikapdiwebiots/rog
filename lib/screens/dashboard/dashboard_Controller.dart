@@ -18,7 +18,6 @@ class DashboardController extends GetxController {
   //list of bottomnavigator page
   List<Widget> widgetOptions = <Widget>[
     CameraGroup(),
-    Connect(),
     AlertsScreen(),
     SettingScreen()
   ];
@@ -36,7 +35,7 @@ class DashboardController extends GetxController {
     selectedIndex = index;
     print('index : ' + index.toString());
     update();
-    if (selectedIndex == 3) {
+    if (selectedIndex == 2) {
       dynamic userData = await Helper().getStorage('userData');
       name = userData['first_name'];
       lastname = userData['last_name'];
