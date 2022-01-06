@@ -123,8 +123,8 @@ class _GroupCameraListState extends State<GroupCameraList> {
                             'camera_groups_uuid':
                                 groupCameraCtrl.camera_groups_uuid,
                             'camera_uuid': groupCameraCtrl.data[index]['uuid'],
-                            'cameraName': 'Clubhouse Entrance Gate',
-                            'groupName': 'Cobalt Security Seabridge'
+                            'cameraName': groupCameraCtrl.name,
+                            'groupName': groupCameraCtrl.data[index]['name']
                           };
                           Get.toNamed(routeName.cameraCard, arguments: data);
                         },
