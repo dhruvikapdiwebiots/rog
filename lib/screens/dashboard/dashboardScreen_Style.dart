@@ -13,10 +13,8 @@ class DashboardScreenStyle {
         selectedIndex == 0
             ? AppFont().mycameragroups
             : selectedIndex == 1
-                ? AppFont().connect
-                : selectedIndex == 2
-                    ? AppFont().alert
-                    : AppFont().loginSecurity,
+                ? AppFont().alert
+                : AppFont().loginSecurity,
         style: new TextStyle(
             fontFamily: GoogleFonts.poppins().fontFamily,
             fontSize: AppScreenUtil().fontSize(18.0),
