@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
-import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
+import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
 import 'package:rog/screens/cameragroup/cameragroup.dart';
-import 'package:rog/screens/connect/connect.dart';
 import 'package:rog/screens/settingScreen/settingScreen.dart';
 import 'package:rog/utils/commonController.dart';
 import 'package:rog/utils/helper.dart';
@@ -14,6 +13,7 @@ class DashboardController extends GetxController {
   String lastname = '';
   String email = '';
   CommonController commonController = Get.find();
+  AlertScreenController alertController = Get.find();
 
   //list of bottomnavigator page
   List<Widget> widgetOptions = <Widget>[
@@ -35,6 +35,9 @@ class DashboardController extends GetxController {
     selectedIndex = index;
     print('index : ' + index.toString());
     update();
+    if (selectedIndex == 1) {
+      alertController.getAlertData();
+    }
     if (selectedIndex == 2) {
       dynamic userData = await Helper().getStorage('userData');
       name = userData['first_name'];
