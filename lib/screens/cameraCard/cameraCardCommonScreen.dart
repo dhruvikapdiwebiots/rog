@@ -8,11 +8,11 @@ import 'package:rog/utils/custom_cached_network_image.dart';
 class CameraCardCommonScreen {
   // common Text Layout
   final commonText = (text,
-      {double? fontSize,
-        TextAlign? textAlign,
-        Color? color,
-        FontWeight? fontWeight,
-        double? letterSpacing}) =>
+          {double? fontSize,
+          TextAlign? textAlign,
+          Color? color,
+          FontWeight? fontWeight,
+          double? letterSpacing}) =>
       Text(
         text,
         textAlign: textAlign,
@@ -23,24 +23,21 @@ class CameraCardCommonScreen {
             letterSpacing: letterSpacing),
       );
 
-
-
   //camera name Layout
   final cameraNameLayout = (text) => GroupCameraScreenStyle().cameraNameStyle(
       child: CameraCardCommonScreen().commonText(text, fontSize: 16));
 
   //menu Icon Style
   final menuiconStyl = (icon) => Icon(
-    icon,
-    color: appColor.whiteColor,
-  );
+        icon,
+        color: appColor.whiteColor,
+      );
 
   //imageLayout
   final imageLayout = (
-      context,
-      image,
-      ) =>
-
+    context,
+    image,
+  ) =>
       CustomCachedNetworkImage(
         url: image,
         width: MediaQuery.of(context).size.width,
@@ -52,15 +49,16 @@ class CameraCardCommonScreen {
   //main body ui design
   final body =
       (BuildContext context, cameraNameLayout, imageLayout, timeDateDisplay) =>
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            cameraNameLayout,
-            CameraCardScreenStyle().colorSpace,
-            imageLayout,
-            CameraCardScreenStyle().specing(10),
-            timeDateDisplay
-          ],
-        ),
-      );
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                cameraNameLayout,
+                CameraCardScreenStyle().colorSpace,
+                imageLayout,
+                CameraCardScreenStyle().specing(10),
+                timeDateDisplay,
+                CameraCardScreenStyle().specing(20),
+              ],
+            ),
+          );
 }

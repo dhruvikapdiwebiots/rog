@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
@@ -7,6 +8,7 @@ import 'package:rog/screens/cameraCard/cameraCard_controller.dart';
 import 'package:rog/screens/cameraCard/viewandalertLayout.dart';
 import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
+import 'package:rog/utils/common_example_wrapper.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({Key? key}) : super(key: key);
@@ -39,8 +41,22 @@ class _CameraCardState extends State<CameraCard> {
           ? Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                CameraCardCommonScreen()
-                    .imageLayout(context, cameraCardCtrl.data['thumbnail_url']),
+                InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CommonExampleRouteWrapper(
+                        imageProvider:
+                            NetworkImage(cameraCardCtrl.data['thumbnail_url']),
+                        filterQuality: FilterQuality.medium,
+                        minScale: PhotoViewComputedScale.contained * 0.8,
+                        enableRotation: true,
+                      ),
+                    ),
+                  ),
+                  child: CameraCardCommonScreen().imageLayout(
+                      context, cameraCardCtrl.data['thumbnail_url']),
+                ),
                 CameraCardScreenStyle().viewLiveAndAlertStyle(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
