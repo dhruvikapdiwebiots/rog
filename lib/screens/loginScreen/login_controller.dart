@@ -112,26 +112,33 @@ class LoginController extends GetxController {
     }
   }
 
+//check whether user is exists or not and save fcmtoken
   setFirebase() async {
     var token = await FirebaseMessaging.instance.getToken();
     dynamic userData = await Helper().getStorage('userData');
     print('userData : $userData');
     String uuid = userData['uuid'];
-
-    DocumentReference documentReferencer =
-        uuid == "" ? users.doc() : users.doc(uuid);
+    print('uu : $uuid');
     Map<String, dynamic> data = <String, dynamic>{
       "fcmToken": token,
     };
-    uuid == ""
-        ? await documentReferencer
-            .set(data)
-            .whenComplete(() => print('Done'))
-            .catchError((e) => print(e))
-        : await documentReferencer
-            .update(data)
-            .whenComplete(() => print('Update Done'))
-            .catchError((e) => print(e));
+    DocumentReference documentReferencer =
+        uuid == "" ? users.doc() : users.doc(uuid);
+
+    DocumentSnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+    if (querySnapshot.exists) {
+      await documentReferencer
+          .update(data)
+          .whenComplete(() => print('Update Done'))
+          .catchError((e) => print(e));
+    } else {
+      print('errt');
+      await documentReferencer
+          .set(data)
+          .whenComplete(() => print('Done'))
+          .catchError((e) => print(e));
+    }
   }
 
   //forgot password api
