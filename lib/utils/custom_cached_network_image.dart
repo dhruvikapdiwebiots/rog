@@ -9,7 +9,14 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final double? width;
   final BoxFit? fit;
 
-  const CustomCachedNetworkImage({Key? key, this.url, this.errorLocalPath, this.height, this.width, this.fit = BoxFit.cover}) : super(key: key);
+  const CustomCachedNetworkImage(
+      {Key? key,
+      this.url,
+      this.errorLocalPath,
+      this.height,
+      this.width,
+      this.fit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +26,13 @@ class CustomCachedNetworkImage extends StatelessWidget {
       height: AppScreenUtil().size(height!),
       width: AppScreenUtil().size(width!),
       fit: fit,
-      imageErrorBuilder: (BuildContext? context, Object? exception, StackTrace? stackTrace) {
+      imageErrorBuilder:
+          (BuildContext? context, Object? exception, StackTrace? stackTrace) {
         return Image.asset(
           errorLocalPath!,
           height: AppScreenUtil().size(height!),
-          width:AppScreenUtil().size(width!),
-          fit: fit!,
+          width: AppScreenUtil().size(width!),
+          fit: fit,
         );
       },
     );

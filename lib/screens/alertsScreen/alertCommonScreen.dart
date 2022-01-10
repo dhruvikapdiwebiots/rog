@@ -28,9 +28,9 @@ class AlertCommonScreen {
   ) =>
       CustomCachedNetworkImage(
         url: image,
-        width: MediaQuery.of(context).size.width,
-        height: AppScreenUtil().size(400),
-        fit: BoxFit.fill,
+        width: AppScreenUtil().size(400),
+        height: AppScreenUtil().size(300),
+        fit: BoxFit.cover,
         errorLocalPath: imageAssets.cameraNote,
       );
 
