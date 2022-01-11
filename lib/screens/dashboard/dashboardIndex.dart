@@ -27,7 +27,6 @@ class DashboardIndex extends StatefulWidget {
 }
 
 class _DashboardIndexState extends State<DashboardIndex> {
-
   @override
   void initState() {
     initNotification();
@@ -51,11 +50,16 @@ class _DashboardIndexState extends State<DashboardIndex> {
 
       /// We use this channel in the `AndroidManifest.xml` file to override the
       /// default FCM channel to enable heads up notifications.
-      await flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel!);
+      await flutterLocalNotificationsPlugin!
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel!);
     }
 
     //when app is [closed | killed | terminated]
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
       if (message != null) {
         print("Notification On InitMsg");
         print(message);
@@ -64,8 +68,17 @@ class _DashboardIndexState extends State<DashboardIndex> {
       }
     });
 
-    var initialzationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings = InitializationSettings(android: initialzationSettingsAndroid);
+    final IOSInitializationSettings initializationSettingsIOS =
+        IOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+
+    var initialzationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettings = InitializationSettings(
+        android: initialzationSettingsAndroid, iOS: initializationSettingsIOS);
 
     flutterLocalNotificationsPlugin!.initialize(initializationSettings);
     print('initCheck');
@@ -103,8 +116,6 @@ class _DashboardIndexState extends State<DashboardIndex> {
     });
 
     requestPermissions();
-
-    getToken();
   }
 
   getToken() async {
@@ -113,7 +124,8 @@ class _DashboardIndexState extends State<DashboardIndex> {
   }
 
   requestPermissions() async {
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
       announcement: true,
       carPlay: true,
       criticalAlert: true,
@@ -121,7 +133,6 @@ class _DashboardIndexState extends State<DashboardIndex> {
 
     print(settings.authorizationStatus);
   }
-
 
   @override
   Widget build(BuildContext context) {

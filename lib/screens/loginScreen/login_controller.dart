@@ -115,6 +115,7 @@ class LoginController extends GetxController {
 //check whether user is exists or not and save fcmtoken
   setFirebase() async {
     var token = await FirebaseMessaging.instance.getToken();
+    print('loginToken : $token');
     dynamic userData = await Helper().getStorage('userData');
     print('userData : $userData');
     String uuid = userData['uuid'];
