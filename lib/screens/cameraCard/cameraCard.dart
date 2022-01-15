@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
@@ -9,6 +9,7 @@ import 'package:rog/screens/cameraCard/viewandalertLayout.dart';
 import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 import 'package:rog/utils/common_example_wrapper.dart';
+import 'package:rog/utils/helper.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({Key? key}) : super(key: key);
@@ -22,6 +23,10 @@ class _CameraCardState extends State<CameraCard> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     //camera name
     final cameraNameLayout = GetBuilder<CameraCardController>(
       builder: (_) => CameraCardScreenStyle().cameraAndGroupNameStyle(
@@ -42,18 +47,28 @@ class _CameraCardState extends State<CameraCard> {
               alignment: Alignment.bottomCenter,
               children: [
                 InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CommonExampleRouteWrapper(
-                        imageProvider:
-                            NetworkImage(cameraCardCtrl.data['thumbnail_url']),
-                        filterQuality: FilterQuality.medium,
-                        minScale: PhotoViewComputedScale.contained * 0.8,
-                        enableRotation: true,
-                      ),
-                    ),
-                  ),
+                  onTap: () async {
+                    await Helper().writeStorage('type', 'cameraview');
+                    await Helper().writeStorage('camera_groups_uuid',
+                        cameraCardCtrl.camera_groups_uuid);
+                    await Helper().writeStorage(
+                        'camera_uuid', cameraCardCtrl.camera_uuid);
+                    await Helper()
+                        .writeStorage('cameraName', cameraCardCtrl.name);
+                    await Helper()
+                        .writeStorage('groupName', cameraCardCtrl.groupname);
+
+                    Navigator.of(context)
+                        .push(ImagePreview(
+                            image: cameraCardCtrl.data['thumbnail_url']))
+                        .then((value) {
+                      SystemChrome.setPreferredOrientations([
+                        DeviceOrientation.portraitUp,
+                        DeviceOrientation.portraitDown,
+                      ]);
+                      print('auto');
+                    });
+                  },
                   child: CameraCardCommonScreen().imageLayout(
                       context, cameraCardCtrl.data['thumbnail_url']),
                 ),
@@ -110,32 +125,63 @@ class _CameraCardState extends State<CameraCard> {
     );
 
     return GetBuilder<CameraCardController>(
-      builder: (_) => GetBuilder<DashboardController>(
-        builder: (controller) => Scaffold(
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: appColor.primaryColor,
-              boxShadow: [
-                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
-              ],
+      builder: (_) => GetBuilder<DashboardController>(builder: (controller) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+        return WillPopScope(
+          onWillPop: () async {
+            String type = await Helper().getStorage('type');
+            if (type == 'cameraview') {
+              String name = await Helper().getStorage('cameraName');
+              String cameraGroupId =
+                  await Helper().getStorage('camera_groups_uuid');
+              var data = {'name': name, 'id': cameraGroupId};
+              Get.toNamed(routeName.groupCameraList, arguments: data);
+            } else {
+              Get.back();
+            }
+            return false;
+          },
+          child: Scaffold(
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: appColor.primaryColor,
+                boxShadow: [
+                  BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+                ],
+              ),
+              child: BottomNavigatorCard(
+                selectedIndex: controller.selectedIndex,
+                onTap: (index) async {
+                  Get.back();
+                  Get.back();
+
+                  controller.navigationbarchange(index);
+                },
+              ),
             ),
-            child: BottomNavigatorCard(
-              selectedIndex: controller.selectedIndex,
-              onTap: (index) {
+            appBar:
+                CameraCardScreenStyle().appBarStyle(context, onBack: () async {
+              String type = await Helper().getStorage('type');
+              if (type == 'cameraview') {
+                String name = await Helper().getStorage('cameraName');
+                String cameraGroupId =
+                    await Helper().getStorage('camera_groups_uuid');
+                var data = {'name': name, 'id': cameraGroupId};
+                Get.toNamed(routeName.groupCameraList, arguments: data);
+              } else {
                 Get.back();
-                Get.back();
-                controller.navigationbarchange(index);
-              },
+              }
+            }),
+            body: Container(
+              child: CameraCardCommonScreen().body(
+                  context, cameraNameLayout, imageLayout, timeDateDisplay),
             ),
           ),
-          appBar: CameraCardScreenStyle()
-              .appBarStyle(context, onBack: () => Get.back()),
-          body: Container(
-            child: CameraCardCommonScreen()
-                .body(context, cameraNameLayout, imageLayout, timeDateDisplay),
-          ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

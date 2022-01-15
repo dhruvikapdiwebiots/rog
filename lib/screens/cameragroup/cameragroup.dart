@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameragroup/cameraGroupCard.dart';
 import 'package:rog/screens/cameragroup/cameragroup_controller.dart';
-import 'package:rog/utils/loading_component.dart';
 import 'package:rog/utils/shimmer.dart';
 
 class CameraGroup extends StatefulWidget {
@@ -23,8 +22,8 @@ class _CameraGroupState extends State<CameraGroup> {
           margin: EdgeInsets.all(AppScreenUtil().size(15)),
           child: cameraListCtrl.isLoading
               ? ShimmerCardListSkeleton(
-            isBottomLinesActive: false,
-          )
+                  isBottomLinesActive: false,
+                )
               : cameraListCtrl.data != null
                   ? ListView.builder(
                       itemCount: cameraListCtrl.data.length,
@@ -32,6 +31,9 @@ class _CameraGroupState extends State<CameraGroup> {
                         return CameraGroupCard(
                           data: cameraListCtrl.data[index],
                           onTap: () {
+                            print(
+                                'name : ${cameraListCtrl.data[index]['name']}');
+                            print('id : ${cameraListCtrl.data[index]['uuid']}');
                             var data = {
                               'name': cameraListCtrl.data[index]['name'],
                               'id': cameraListCtrl.data[index]['uuid']

@@ -4,7 +4,7 @@ import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertCard.dart';
 import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
-import 'package:rog/utils/loading_component.dart';
+import 'package:rog/utils/common_example_wrapper.dart';
 import 'package:rog/utils/shimmer.dart';
 
 class AlertsScreen extends StatefulWidget {
@@ -30,8 +30,11 @@ class _AlertsScreenState extends State<AlertsScreen> {
                   itemCount: alertCtrl.data.length,
                   itemBuilder: (context, index) {
                     return AlertCard(
-                      data: alertCtrl.data[index],
-                    );
+                        data: alertCtrl.data[index],
+                        onTap: () {
+                          Navigator.of(context).push(ImagePreview(
+                              image: alertCtrl.data[index]['alert_image_url']));
+                        });
                   },
                 )
               : Container(),

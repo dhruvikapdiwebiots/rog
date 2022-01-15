@@ -44,7 +44,6 @@ class GroupCameraListController extends GetxController {
         update();
         Get.offAllNamed(routeName.loginScreen);
       }
-
     } catch (e) {
       isLoading = false;
       update();
@@ -56,8 +55,11 @@ class GroupCameraListController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     var args = Get.arguments;
-    name = args['name'];
-    camera_groups_uuid = args['id'];
+    print('args : $args');
+    if (args != null && args != "") {
+      name = args['name'];
+      camera_groups_uuid = args['id'];
+    }
     update();
     getCameraGroupData();
     super.onInit();

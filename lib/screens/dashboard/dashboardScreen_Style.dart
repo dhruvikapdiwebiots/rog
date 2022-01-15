@@ -9,7 +9,7 @@ class DashboardScreenStyle {
       );
 
   //text STyle
-  final titleStyle = (selectedIndex) => Text(
+  final titleStyle = (selectedIndex, isOrientation) => Text(
         selectedIndex == 0
             ? AppFont().mycameragroups
             : selectedIndex == 1
@@ -17,7 +17,9 @@ class DashboardScreenStyle {
                 : AppFont().loginSecurity,
         style: new TextStyle(
             fontFamily: GoogleFonts.poppins().fontFamily,
-            fontSize: AppScreenUtil().fontSize(18.0),
+            fontSize: isOrientation == true
+                ? AppScreenUtil().fontSize(12.0)
+                : AppScreenUtil().fontSize(18.0),
             fontWeight: FontWeight.w500,
             color: appColor.whiteColor),
       );
@@ -78,7 +80,8 @@ class DashboardScreenStyle {
   //appbar style
   final appBarStyle = (context, selectedIndex,
           {GestureTapCallback? onTapPushNotification,
-          GestureTapCallback? onBack}) =>
+          GestureTapCallback? onBack,
+          bool? isOrientation}) =>
       PreferredSize(
         child: new Container(
           padding: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -106,7 +109,8 @@ class DashboardScreenStyle {
                                 .menuiconStyl(Icons.arrow_back),
                           ),
                     DashboardScreenStyle().specingWidth(15),
-                    DashboardScreenStyle().titleStyle(selectedIndex),
+                    DashboardScreenStyle()
+                        .titleStyle(selectedIndex, isOrientation),
                   ],
                 ),
               ],

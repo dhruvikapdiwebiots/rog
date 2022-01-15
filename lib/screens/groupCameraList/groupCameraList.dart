@@ -6,6 +6,7 @@ import 'package:rog/screens/groupCameraList/groupCameraCommonScreen.dart';
 import 'package:rog/screens/groupCameraList/groupCameraListCard.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 import 'package:rog/screens/groupCameraList/groupcameraList_controller.dart';
+import 'package:rog/utils/helper.dart';
 import 'package:rog/utils/loading_component.dart';
 
 class GroupCameraList extends StatefulWidget {
@@ -56,28 +57,48 @@ class _GroupCameraListState extends State<GroupCameraList> {
 
     return GetBuilder<GroupCameraListController>(
       builder: (_) => GetBuilder<DashboardController>(
-        builder: (controller) => Scaffold(
-          backgroundColor: appColor.lightGreyColor,
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: appColor.primaryColor,
-              boxShadow: [
-                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
-              ],
+        builder: (controller) => WillPopScope(
+          onWillPop: () async {
+            String type = await Helper().getStorage('type');
+            if (type == 'cameraview') {
+              Get.offAllNamed(routeName.dashboard);
+              await Helper().writeStorage('type', '');
+            } else {
+              Get.back();
+            }
+            return false;
+          },
+          child: Scaffold(
+            backgroundColor: appColor.lightGreyColor,
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: appColor.primaryColor,
+                boxShadow: [
+                  BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+                ],
+              ),
+              child: BottomNavigatorCard(
+                selectedIndex: controller.selectedIndex,
+                onTap: (index) {
+                  Get.back();
+                  controller.navigationbarchange(index);
+                },
+              ),
             ),
-            child: BottomNavigatorCard(
-              selectedIndex: controller.selectedIndex,
-              onTap: (index) {
+            appBar:
+                GroupCameraScreenStyle().appBarStyle(context, onBack: () async {
+              String type = await Helper().getStorage('type');
+              if (type == 'cameraview') {
+                Get.offAllNamed(routeName.dashboard);
+                await Helper().writeStorage('type', '');
+              } else {
                 Get.back();
-                controller.navigationbarchange(index);
-              },
-            ),
+              }
+            }),
+            body: Container(
+                child: GroupCameraCommonScreen()
+                    .body(context, cameraNameLayout, listLayout)),
           ),
-          appBar: GroupCameraScreenStyle()
-              .appBarStyle(context, onBack: () => Get.back()),
-          body: Container(
-              child: GroupCameraCommonScreen()
-                  .body(context, cameraNameLayout, listLayout)),
         ),
       ),
     );
