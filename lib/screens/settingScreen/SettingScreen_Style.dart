@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rog/packages/config_package.dart';
 
@@ -33,7 +32,7 @@ class SettingScreenStyle {
       decoration: BoxDecoration(
           color: appColor.buttonColor,
           border: Border.all(color: appColor.buttonColor, width: 1.5),
-          borderRadius: BorderRadius.circular(10.0)),
+          borderRadius: BorderRadius.circular(AppScreenUtil().borderRadius(10.0))),
       child: child);
 
 //animated Container

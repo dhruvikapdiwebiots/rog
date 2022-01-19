@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/settingScreen/SettingScreen_Style.dart';
 import 'package:rog/screens/settingScreen/settingCommonScreen.dart';
@@ -24,6 +25,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     textformfieldWidget: Container(
                       width: MediaQuery.of(context).size.width,
                       child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.characters,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp("[A-Z]")),
+
+                        ],
                         controller: settingCtrl.controller,
                       ),
                     ),
@@ -40,23 +47,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 SettingCommonScreen().commonText(AppFont().email,
                     fontSize: 16, color: appColor.grey),
                 SettingScreenStyle().specingWidth(55),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: AppScreenUtil().size(10),
-                        ),
-                        child: SettingCommonScreen().commonText(
-                            settingCtrl.dashboardCtrl.email,
-                            fontSize: 14,
-                            textDecoration: TextDecoration.none),
-                      ),
-                      Container()
-                    ],
-                  ),
-                ),
+                SettingCommonScreen().emailShow(settingCtrl.dashboardCtrl.email)
               ],
             ));
 

@@ -15,7 +15,7 @@ class CommonController extends GetxController {
     print('token : $token');
 
     final data = {
-      "notification": {"body": msg, "title": title},
+      "notification": {"body": msg, "title": title,},
       "priority": "high",
       "data": {
         "click_action": "FLUTTER_NOTIFICATION_CLICK",
@@ -42,7 +42,7 @@ class CommonController extends GetxController {
           .post('https://fcm.googleapis.com/fcm/send', data: data);
 
       if (response.statusCode == 200) {
-        Fluttertoast.showToast(msg: 'Request Sent To Driver');
+        print('Alert push notification send');
       } else {
         print('notification sending failed');
         // on failure do sth

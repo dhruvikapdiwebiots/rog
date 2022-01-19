@@ -16,25 +16,35 @@ class CameraCardController extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
-    var data = Get.arguments;
-    name = data['cameraName'];
-    groupname = data['groupName'];
-
-    update();
     getStorageVal();
     getCameraViewData();
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    var data = Get.arguments;
+    name = data['cameraName'];
+    groupname = data['groupName'];
+
+    update();
+    print('name : $name');
+    print('groupName : $groupname');
+    super.onReady();
+  }
+
   var data;
   bool isLoading = false;
 
+
+  //getStorage value
   getStorageVal() async {
     var data = Get.arguments;
     String cameraGroupId = await Helper().getStorage('camera_groups_uuid');
     String cameraID = await Helper().getStorage('camera_uuid');
-    String cameraGroupName = await Helper().getStorage('name');
-    String cameraNameStorage = await Helper().getStorage('groupname');
+    String cameraGroupName = await Helper().getStorage('cameraName');
+    String cameraNameStorage = await Helper().getStorage('groupName');
 
     if (cameraGroupId != null && cameraGroupId != "") {
       camera_groups_uuid = cameraGroupId;
@@ -67,6 +77,22 @@ class CameraCardController extends GetxController {
     print('calling');
     try {
       isLoading = true;
+      String cameraGroupId = await Helper().getStorage('camera_groups_uuid');
+      String cameraID = await Helper().getStorage('camera_uuid');
+      if (cameraGroupId != null && cameraGroupId != "") {
+        camera_groups_uuid = cameraGroupId;
+      } else {
+        camera_groups_uuid = data['camera_groups_uuid'];
+      }
+
+      if (cameraID != null && cameraID != "") {
+        camera_uuid = cameraID;
+      } else {
+        camera_uuid = data['camera_uuid'];
+      }
+
+      print('camera_uuid : $camera_uuid');
+      print('camera_groups_uuid : $camera_groups_uuid');
       update();
       List requestData = [];
       var userData = await Helper().getStorage('userData');
@@ -80,6 +106,11 @@ class CameraCardController extends GetxController {
             'get');
         print('status :${resData.statusCode}');
         if (resData.statusCode == 200) {
+          var imagedata =[
+            resData.body['thumbnail_url'],
+
+          ];
+          resData.body['imagesArray'] = imagedata;
           data = resData.body;
           print('data : $data');
           date = DateFormat('MM/dd/yyyy')
@@ -99,8 +130,42 @@ class CameraCardController extends GetxController {
       }
     } catch (e) {
       isLoading = false;
-      update();
+      //update();
       print(e);
     }
   }
+
+  //willpop scope back
+  onBackFunction()async{
+    String type = await Helper().getStorage('type');
+    if (type == 'cameraview') {
+      String name = await Helper().getStorage('cameraName');
+      String cameraGroupId =
+      await Helper().getStorage('camera_groups_uuid');
+      var data = {'name': name, 'id': cameraGroupId};
+      Get.toNamed(routeName.groupCameraList, arguments: data);
+      await Helper().writeStorage('camera_uuid', '');
+    } else {
+      Get.back();
+    }
+
+  }
+
+  //aapbar back function
+onBackAppBar()async{
+  String type = await Helper().getStorage('type');
+  print('type : $type');
+  if (type == 'cameraview') {
+    data['thumbnail_url'] = imageAssets.cameraNote;
+    String name = await Helper().getStorage('cameraName');
+    String cameraGroupId =
+    await Helper().getStorage('camera_groups_uuid');
+    var argdata = {'name': name, 'id': cameraGroupId};
+    Get.toNamed(routeName.groupCameraList, arguments: argdata);
+    await Helper().writeStorage('camera_uuid', '');
+  } else {
+    Get.back();
+  }
+}
+
 }

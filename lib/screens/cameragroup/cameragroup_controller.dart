@@ -44,6 +44,23 @@ class CameraGroupController extends GetxController {
     }
   }
 
+  //onTap function
+  onTap(index)async{
+    await Helper().writeStorage('camera_uuid', '');
+    await Helper().writeStorage('camera_groups_uuid', '');
+    await Helper().writeStorage('cameraName', '');
+    await Helper().writeStorage('groupName', '');
+    print(
+        'name : ${data[index]['name']}');
+    print('id : ${data[index]['uuid']}');
+    var argData = {
+      'name': data[index]['name'],
+      'id': data[index]['uuid']
+    };
+    Get.toNamed(routeName.groupCameraList,
+        arguments: argData);
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit

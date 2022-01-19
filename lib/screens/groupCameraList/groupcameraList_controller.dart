@@ -1,5 +1,6 @@
 import 'package:rog/networking/index.dart';
 import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/cameraCard/cameraCard_controller.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
 import 'package:rog/utils/commonController.dart';
 import 'package:rog/utils/helper.dart';
@@ -9,6 +10,7 @@ class GroupCameraListController extends GetxController {
   String camera_groups_uuid = '';
   String camera_uuid = '';
   DashboardController dashboardController = Get.find();
+
   var data;
   bool isLoading = false;
 
@@ -48,6 +50,44 @@ class GroupCameraListController extends GetxController {
       isLoading = false;
       update();
       print(e);
+    }
+  }
+
+  //ontap on camera card
+  onTap(index)async{
+    var cameraCardController = Get.put(CameraCardController());
+    await Helper().writeStorage('camera_groups_uuid',
+        camera_groups_uuid);
+    await Helper().writeStorage(
+        'camera_uuid', data[index]['uuid']);
+    await Helper()
+        .writeStorage('cameraName', name);
+    await Helper()
+        .writeStorage('groupName', data[index]['name']);
+    update();
+
+    var argdata = {
+      'camera_groups_uuid':
+      camera_groups_uuid,
+      'camera_uuid': data[index]['uuid'],
+      'cameraName': name,
+      'groupName': data[index]['name']
+    };
+    print('args : $argdata');
+    cameraCardController.getCameraViewData();
+    cameraCardController.getStorageVal();
+
+    Get.toNamed(routeName.cameraCard, arguments: argdata);
+  }
+
+  //onBack function
+  onBack()async{
+    String type = await Helper().getStorage('type');
+    if (type == 'cameraview') {
+      Get.offAllNamed(routeName.dashboard);
+      await Helper().writeStorage('type', '');
+    } else {
+      Get.back();
     }
   }
 

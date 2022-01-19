@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rog/packages/config_package.dart';
 
@@ -54,6 +53,4 @@ class AlertsScreenStyle {
     color: color,
     child: child,
   );
-
-
 }

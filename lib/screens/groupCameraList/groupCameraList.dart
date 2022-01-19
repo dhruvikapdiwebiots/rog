@@ -6,7 +6,6 @@ import 'package:rog/screens/groupCameraList/groupCameraCommonScreen.dart';
 import 'package:rog/screens/groupCameraList/groupCameraListCard.dart';
 import 'package:rog/screens/groupCameraList/groupCameraScreen_Style.dart';
 import 'package:rog/screens/groupCameraList/groupcameraList_controller.dart';
-import 'package:rog/utils/helper.dart';
 import 'package:rog/utils/loading_component.dart';
 
 class GroupCameraList extends StatefulWidget {
@@ -38,15 +37,8 @@ class _GroupCameraListState extends State<GroupCameraList> {
                     itemBuilder: (context, index) {
                       return GroupCameraListCard(
                         data: groupCameraCtrl.data[index],
-                        onTap: () {
-                          var data = {
-                            'camera_groups_uuid':
-                                groupCameraCtrl.camera_groups_uuid,
-                            'camera_uuid': groupCameraCtrl.data[index]['uuid'],
-                            'cameraName': groupCameraCtrl.name,
-                            'groupName': groupCameraCtrl.data[index]['name']
-                          };
-                          Get.toNamed(routeName.cameraCard, arguments: data);
+                        onTap: ()async {
+                         groupCameraCtrl.onTap(index);
                         },
                       );
                     },
@@ -59,13 +51,7 @@ class _GroupCameraListState extends State<GroupCameraList> {
       builder: (_) => GetBuilder<DashboardController>(
         builder: (controller) => WillPopScope(
           onWillPop: () async {
-            String type = await Helper().getStorage('type');
-            if (type == 'cameraview') {
-              Get.offAllNamed(routeName.dashboard);
-              await Helper().writeStorage('type', '');
-            } else {
-              Get.back();
-            }
+            groupCameraCtrl.onBack();
             return false;
           },
           child: Scaffold(
@@ -87,13 +73,7 @@ class _GroupCameraListState extends State<GroupCameraList> {
             ),
             appBar:
                 GroupCameraScreenStyle().appBarStyle(context, onBack: () async {
-              String type = await Helper().getStorage('type');
-              if (type == 'cameraview') {
-                Get.offAllNamed(routeName.dashboard);
-                await Helper().writeStorage('type', '');
-              } else {
-                Get.back();
-              }
+              groupCameraCtrl.onBack();
             }),
             body: Container(
                 child: GroupCameraCommonScreen()

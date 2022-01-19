@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen_Style.dart';
 import 'package:rog/utils/custom_cached_network_image.dart';

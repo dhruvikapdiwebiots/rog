@@ -50,5 +50,7 @@ class AppFont {
   String email = "Email";
   String connect = "Connect";
   String edit = "Edit";
+  String proceeding = "By proceeding, you agree to our ";
+  String and =  ' and ';
 
 }

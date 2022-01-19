@@ -14,7 +14,7 @@ class AlertCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String createdDate = DateFormat('MM/dd/yyyy hh:mm a')
-        .format(DateTime.parse(data["updated_at"]));
+        .format(DateTime.parse(data["inserted_at"]));
     return Container(
       margin: EdgeInsets.only(bottom: AppScreenUtil().size(10)),
       child: Card(

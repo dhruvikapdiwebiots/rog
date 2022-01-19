@@ -84,6 +84,26 @@ class SettingCommonScreen {
         ],
       );
 
+
+  //email name show layout
+  final emailShow =(email) =>Expanded(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: AppScreenUtil().size(10),
+          ),
+          child: SettingCommonScreen().commonText(
+              email,
+              fontSize: 14,
+              textDecoration: TextDecoration.none),
+        ),
+        Container()
+      ],
+    ),
+  );
+
   //main body ui design
   final body =
       (BuildContext context, naemLayout, emailLayout, buttonLayout) => Stack(

@@ -30,16 +30,8 @@ class _CameraGroupState extends State<CameraGroup> {
                       itemBuilder: (context, index) {
                         return CameraGroupCard(
                           data: cameraListCtrl.data[index],
-                          onTap: () {
-                            print(
-                                'name : ${cameraListCtrl.data[index]['name']}');
-                            print('id : ${cameraListCtrl.data[index]['uuid']}');
-                            var data = {
-                              'name': cameraListCtrl.data[index]['name'],
-                              'id': cameraListCtrl.data[index]['uuid']
-                            };
-                            Get.toNamed(routeName.groupCameraList,
-                                arguments: data);
+                          onTap: () async{
+                            cameraListCtrl.onTap(index);
                           },
                         );
                       },

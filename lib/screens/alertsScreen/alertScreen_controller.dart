@@ -7,6 +7,7 @@ class AlertScreenController extends GetxController {
   CommonController commonCtrl = Get.find();
   var data;
   bool isLoading = false;
+  int length =0;
 
   //get alert data
   getAlertData() async {
@@ -24,8 +25,15 @@ class AlertScreenController extends GetxController {
             'users/${userData['uuid']}/alerts', requestData, 'get');
         print('status :${resData.statusCode}');
         if (resData.statusCode == 200) {
+
+          for(var i =0;i<resData.body.length;i++){
+            var imagedata =[
+              resData.body[i]['alert_image_url'],
+            ];
+            resData.body[i]['imagesArray'] = imagedata;
+          }
           data = resData.body;
-          print('data : $data');
+          print('alertData : $data');
           update();
         } else {
           print('Error while getting userData');

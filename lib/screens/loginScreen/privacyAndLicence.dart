@@ -20,7 +20,7 @@ class _PrivacyAndLicenceState extends State<PrivacyAndLicence> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'By proceeding, you agree to our ',
+              text: AppFont().proceeding,
               style: TextStyle(color: Colors.black54),
             ),
             TextSpan(
@@ -30,7 +30,7 @@ class _PrivacyAndLicenceState extends State<PrivacyAndLicence> {
                 ..onTap =widget.licenceonTap,
             ),
             TextSpan(
-              text: ' and ',
+              text: AppFont().and,
               style: TextStyle(color: Colors.black54),
             ),
             TextSpan(

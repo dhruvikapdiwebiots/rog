@@ -39,6 +39,11 @@ class _SplashScreenState extends State<SplashScreen>
 
   //check wether user already login or not
   void checkLogin() async {
+    await Helper().writeStorage('camera_uuid', '');
+    await Helper().writeStorage('camera_groups_uuid', '');
+    await Helper().writeStorage('cameraName', '');
+    await Helper().writeStorage('groupName', '');
+    await Helper().writeStorage('type', '');
     String? token = await SharedPref().getSharedPref('token');
     if (token != null && token != "") {
       bool isToken = await CommonController().checkTokenValidation();
@@ -80,6 +85,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: appColor.primaryColor,
         body: Container(

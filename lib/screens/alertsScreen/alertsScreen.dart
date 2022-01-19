@@ -32,8 +32,8 @@ class _AlertsScreenState extends State<AlertsScreen> {
                     return AlertCard(
                         data: alertCtrl.data[index],
                         onTap: () {
-                          Navigator.of(context).push(ImagePreview(
-                              image: alertCtrl.data[index]['alert_image_url']));
+                          Navigator.of(context).push(AlertImagePreview(type: 'alert',
+                              image: alertCtrl.data[index]['imagesArray']));
                         });
                   },
                 )

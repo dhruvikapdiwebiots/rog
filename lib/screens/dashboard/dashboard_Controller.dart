@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
@@ -13,7 +12,8 @@ class DashboardController extends GetxController {
   String lastname = '';
   String email = '';
   CommonController commonController = Get.find();
-  AlertScreenController alertController = Get.find();
+  AlertScreenController alertController = Get.  find();
+
 
   //list of bottomnavigator page
   List<Widget> widgetOptions = <Widget>[
@@ -32,7 +32,7 @@ class DashboardController extends GetxController {
   //navigation bar change
   navigationbarchange(int index) async {
     String type = await Helper().getStorage('type');
-    if (type == 'cameraview') {
+    if (type == 'cameraview' && type !="") {
       await Helper().writeStorage('type', '');
     }
     await Helper().writeStorage('selectedIndex', selectedIndex);

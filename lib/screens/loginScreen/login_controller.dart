@@ -97,6 +97,11 @@ class LoginController extends GetxController {
         isLoading = false;
         var data = resData.body;
         await Helper().writeStorage('userData', data);
+        await Helper().writeStorage('camera_uuid', '');
+        await Helper().writeStorage('camera_groups_uuid', '');
+        await Helper().writeStorage('cameraName', '');
+        await Helper().writeStorage('groupName', '');
+        await Helper().writeStorage('type', '');
         update();
         await setFirebase();
         Get.toNamed(routeName.dashboard);
