@@ -44,7 +44,7 @@ class CameraGroupController extends GetxController {
     }
   }
 
-  //onTap function
+  //on select any camera group tap function
   onTap(index)async{
     await Helper().writeStorage('camera_uuid', '');
     await Helper().writeStorage('camera_groups_uuid', '');

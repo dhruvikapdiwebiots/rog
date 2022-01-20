@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameragroup/cameraGroupCard.dart';
 import 'package:rog/screens/cameragroup/cameragroup_controller.dart';
@@ -15,7 +16,21 @@ class _CameraGroupState extends State<CameraGroup> {
   var cameraListCtrl = Get.put(CameraGroupController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     return GetBuilder<CameraGroupController>(
       builder: (_) => Scaffold(
         body: Container(

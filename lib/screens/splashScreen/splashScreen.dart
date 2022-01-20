@@ -39,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   //check wether user already login or not
   void checkLogin() async {
+    await Helper().writeStorage('selectedIndex', 0);
     await Helper().writeStorage('camera_uuid', '');
     await Helper().writeStorage('camera_groups_uuid', '');
     await Helper().writeStorage('cameraName', '');

@@ -60,7 +60,7 @@ class _GroupCameraListState extends State<GroupCameraList> {
               decoration: BoxDecoration(
                 color: appColor.primaryColor,
                 boxShadow: [
-                  BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+                  BoxShadow(blurRadius: 20, color: appColor.blackColor.withOpacity(.1))
                 ],
               ),
               child: BottomNavigatorCard(

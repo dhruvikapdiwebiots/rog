@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/screens/dashboard/dashboard.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -29,6 +30,8 @@ class DashboardIndex extends StatefulWidget {
 class _DashboardIndexState extends State<DashboardIndex> {
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     initNotification();
     print('init');
     super.initState();
@@ -136,6 +139,8 @@ class _DashboardIndexState extends State<DashboardIndex> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Dashboard();
   }
 }

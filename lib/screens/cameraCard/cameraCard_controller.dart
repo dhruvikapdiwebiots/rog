@@ -37,7 +37,6 @@ class CameraCardController extends GetxController {
   var data;
   bool isLoading = false;
 
-
   //getStorage value
   getStorageVal() async {
     var data = Get.arguments;
@@ -97,18 +96,19 @@ class CameraCardController extends GetxController {
       List requestData = [];
       var userData = await Helper().getStorage('userData');
 
+      //check whether token is expired to or change
       bool isToken = await CommonController().checkTokenValidation();
       if (isToken) {
         print(requestData.toString());
+        //camera viee api calling
         var resData = await apis.apiCall(
             'users/${userData['uuid']}/camera-groups/${camera_groups_uuid}/cameras/$camera_uuid',
             requestData,
             'get');
         print('status :${resData.statusCode}');
         if (resData.statusCode == 200) {
-          var imagedata =[
+          var imagedata = [
             resData.body['thumbnail_url'],
-
           ];
           resData.body['imagesArray'] = imagedata;
           data = resData.body;
@@ -136,36 +136,32 @@ class CameraCardController extends GetxController {
   }
 
   //willpop scope back
-  onBackFunction()async{
+  onBackFunction() async {
     String type = await Helper().getStorage('type');
     if (type == 'cameraview') {
       String name = await Helper().getStorage('cameraName');
-      String cameraGroupId =
-      await Helper().getStorage('camera_groups_uuid');
+      String cameraGroupId = await Helper().getStorage('camera_groups_uuid');
       var data = {'name': name, 'id': cameraGroupId};
       Get.toNamed(routeName.groupCameraList, arguments: data);
       await Helper().writeStorage('camera_uuid', '');
     } else {
       Get.back();
     }
-
   }
 
   //aapbar back function
-onBackAppBar()async{
-  String type = await Helper().getStorage('type');
-  print('type : $type');
-  if (type == 'cameraview') {
-    data['thumbnail_url'] = imageAssets.cameraNote;
-    String name = await Helper().getStorage('cameraName');
-    String cameraGroupId =
-    await Helper().getStorage('camera_groups_uuid');
-    var argdata = {'name': name, 'id': cameraGroupId};
-    Get.toNamed(routeName.groupCameraList, arguments: argdata);
-    await Helper().writeStorage('camera_uuid', '');
-  } else {
-    Get.back();
+  onBackAppBar() async {
+    String type = await Helper().getStorage('type');
+    print('type : $type');
+    if (type == 'cameraview') {
+      data['thumbnail_url'] = imageAssets.cameraNote;
+      String name = await Helper().getStorage('cameraName');
+      String cameraGroupId = await Helper().getStorage('camera_groups_uuid');
+      var argdata = {'name': name, 'id': cameraGroupId};
+      Get.toNamed(routeName.groupCameraList, arguments: argdata);
+      await Helper().writeStorage('camera_uuid', '');
+    } else {
+      Get.back();
+    }
   }
-}
-
 }

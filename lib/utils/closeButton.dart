@@ -16,11 +16,11 @@ class _CloseButtonLayoutState extends State<CloseButtonLayout> {
       //width: MediaQuery.of(context).size.width,
       right: 10,
       child: IconButton(
-        color: appColor.whiteColor,
+        color: Colors.white,
         onPressed: widget.onPressed,
         icon: Icon(
           Icons.close,
-          color: Colors.white,
+          color: appColor.whiteColor,
         ),
       ),
     );

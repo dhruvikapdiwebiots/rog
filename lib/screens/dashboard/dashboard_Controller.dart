@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
@@ -12,8 +13,7 @@ class DashboardController extends GetxController {
   String lastname = '';
   String email = '';
   CommonController commonController = Get.find();
-  AlertScreenController alertController = Get.  find();
-
+  AlertScreenController alertController = Get.find();
 
   //list of bottomnavigator page
   List<Widget> widgetOptions = <Widget>[
@@ -32,7 +32,7 @@ class DashboardController extends GetxController {
   //navigation bar change
   navigationbarchange(int index) async {
     String type = await Helper().getStorage('type');
-    if (type == 'cameraview' && type !="") {
+    if (type == 'cameraview' && type != "") {
       await Helper().writeStorage('type', '');
     }
     await Helper().writeStorage('selectedIndex', selectedIndex);
@@ -52,7 +52,9 @@ class DashboardController extends GetxController {
     }
   }
 
+  //get selected Bottom Navigation Index Value
   getselectIndex() async {
+    print('getselecteIndex');
     int index = await Helper().getStorage('selectedIndex');
     print('selectedIndex : $index');
     if (index == 1) {
@@ -61,14 +63,19 @@ class DashboardController extends GetxController {
     } else {
       selectedIndex = 0;
     }
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     update();
   }
 
+  //Save the Bottom Navigation at 0 Index
   saveIndex() async {
     await Helper().writeStorage('selectedIndex', 0);
     update();
   }
 
+  //Check Whether last page visit is cameraview and according to
+  //that fetch value and send to camera view page
   checkType() async {
     await Helper().writeStorage('selectedIndex', 0);
     String type = await Helper().getStorage('type');

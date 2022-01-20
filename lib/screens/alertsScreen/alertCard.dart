@@ -15,6 +15,7 @@ class AlertCard extends StatelessWidget {
   Widget build(BuildContext context) {
     String createdDate = DateFormat('MM/dd/yyyy hh:mm a')
         .format(DateTime.parse(data["inserted_at"]));
+    print('Date : ${data["inserted_at"]}');
     return Container(
       margin: EdgeInsets.only(bottom: AppScreenUtil().size(10)),
       child: Card(
@@ -38,7 +39,7 @@ class AlertCard extends StatelessWidget {
                   ),
                   LiveViewLayout(),
                   AlertsScreenStyle().viewLiveAndAlertStyle(
-                    Colors.black87.withOpacity(.7),
+                    appColor.black87Color.withOpacity(.7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -79,9 +79,7 @@ class DashboardScreenStyle {
 
   //appbar style
   final appBarStyle = (context, selectedIndex,
-          {GestureTapCallback? onTapPushNotification,
-          GestureTapCallback? onBack,
-          bool? isOrientation}) =>
+          {GestureTapCallback? onBack, bool? isOrientation}) =>
       PreferredSize(
         child: new Container(
           padding: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),

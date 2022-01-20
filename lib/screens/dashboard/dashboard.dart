@@ -63,9 +63,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver  {
           appBar: DashboardScreenStyle().appBarStyle(
               context, dashboardCtrl.selectedIndex,
               onBack: dashboardCtrl.onBack,
-              onTapPushNotification: () => dashboardCtrl.commonController
-                  .sendNotification(
-                      title: 'This is the Title', msg: 'This is the message')),
+          ),
           body: dashboardCtrl.widgetOptions
               .elementAt(dashboardCtrl.selectedIndex),
         ),

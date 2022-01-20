@@ -13,10 +13,13 @@ class AppColor {
   final Color blackColor = const Color(0XFF000000);
   final Color black12Color = Colors.black12;
   final Color black26Color = Colors.black26;
+  final Color black87Color = Colors.black87;
   final Color transparentColor = Colors.transparent;
   final Color whiteColor = const Color(0XFFFFFFFF);
   final Color darkGreyColor = const Color(0XFF444444);
   final Color redColor = Colors.red;
+  final Color yellowColor = Colors.yellow;
+  final Color redBorderColor = Color(0xFFFF0000);
   final Color greenColor = Colors.green;
   final Color lightGreyColor = const Color(0XFFCCCCCC);
   final Color dividerColor = Colors.grey;

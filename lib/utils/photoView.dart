@@ -16,7 +16,7 @@ class _PhotoViewLayoutState extends State<PhotoViewLayout> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return /*Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Hero(
@@ -54,6 +54,37 @@ class _PhotoViewLayoutState extends State<PhotoViewLayout> {
             pageController: pageController,
           )
       ),
-    );
+    );*/
+      PhotoViewGallery.builder(
+        scrollPhysics: const BouncingScrollPhysics(),
+        onPageChanged: (int index){
+          currentIndex = index;
+          setState(() { });
+        },
+        builder: (BuildContext context, int index) {
+          print('images show : ${widget.image![index]}');
+          return PhotoViewGalleryPageOptions(
+
+            imageProvider: NetworkImage(widget.image![index]),
+            initialScale: PhotoViewComputedScale.contained * 0.8,
+            errorBuilder: (_, __, ___) {
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: appColor.blackColor,
+                child: Center(
+
+                  child: Image.asset(imageAssets.house,height: MediaQuery.of(context).size.height,width: MediaQuery.of(context).size.width,),
+                ),
+              );
+            },
+          );
+        },
+        itemCount: widget.image!.length,
+        backgroundDecoration: BoxDecoration(
+          color: appColor.blackColor,
+        ),
+        pageController: pageController,
+      );
   }
 }

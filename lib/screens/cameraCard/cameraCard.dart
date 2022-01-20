@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
@@ -22,6 +23,10 @@ class _CameraCardState extends State<CameraCard> {
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     // TODO: implement initState
     var data = Get.arguments;
     cameraCardCtrl.name = data['cameraName'];
@@ -34,6 +39,10 @@ class _CameraCardState extends State<CameraCard> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     //camera name
     final cameraNameLayout = GetBuilder<CameraCardController>(
       builder: (_) => CameraCardScreenStyle().cameraAndGroupNameStyle(
@@ -51,7 +60,7 @@ class _CameraCardState extends State<CameraCard> {
     final imageLayout = GetBuilder<CameraCardController>(
       builder: (_) => cameraCardCtrl.data != null && cameraCardCtrl.data != ""
           ? Stack(
-
+              alignment: Alignment.bottomCenter,
               children: [
                 InkWell(
                   onTap: () async {
@@ -126,7 +135,7 @@ class _CameraCardState extends State<CameraCard> {
               decoration: BoxDecoration(
                 color: appColor.primaryColor,
                 boxShadow: [
-                  BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+                  BoxShadow(blurRadius: 20, color: appColor.blackColor.withOpacity(.1))
                 ],
               ),
               child: BottomNavigatorCard(

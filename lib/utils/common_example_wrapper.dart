@@ -91,41 +91,8 @@ class AlertImagePreview extends ModalRoute<void> {
 
     return Stack(
       children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: PhotoViewGallery.builder(
-            scrollPhysics: const BouncingScrollPhysics(),
-            onPageChanged: (int index){
-              currentIndex = index;
-              setState(() { });
-            },
-            builder: (BuildContext context, int index) {
-              print('images show : ${image![index]}');
-              return PhotoViewGalleryPageOptions(
-
-                imageProvider: NetworkImage(image![index]),
-                initialScale: PhotoViewComputedScale.contained * 0.8,
-                errorBuilder: (_, __, ___) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    color: appColor.blackColor,
-                    child: Center(
-
-                      child: Image.asset(imageAssets.house,height: MediaQuery.of(context).size.height,width: MediaQuery.of(context).size.width,),
-                    ),
-                  );
-                },
-              );
-            },
-            itemCount: image!.length,
-
-            backgroundDecoration: const BoxDecoration(
-              color: Colors.black,
-            ),
-            pageController: pageController,
-          )
+        PhotoViewLayout(
+          image: image,
         ),
         Positioned(
           //width: MediaQuery.of(context).size.width,
@@ -171,3 +138,123 @@ class AlertImagePreview extends ModalRoute<void> {
     );
   }
 }
+
+
+class imageSlider extends StatefulWidget {
+  dynamic? image;
+  String? total;
+  String? type;
+
+  imageSlider({this.image,  this.total,this.type});
+
+  @override
+  _imageSliderState createState() => _imageSliderState();
+}
+
+class _imageSliderState extends State<imageSlider> {
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    currentIndex = 0;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    super.initState();
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    return WillPopScope(
+      onWillPop: () async {
+        await SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+        await SystemChrome.setPreferredOrientations(
+            [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        if(widget.type == "alert") {
+          await Helper().writeStorage('selectedIndex', 1);
+        }else{
+          await Helper().writeStorage('selectedIndex', 0);
+        }
+        Get.offAllNamed(routeName.dashboard);
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                  color: Colors.black,
+                  child: PhotoViewGallery.builder(
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    builder: (BuildContext context, int index) {
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider: NetworkImage(widget.image![index]),
+                        initialScale: PhotoViewComputedScale.contained * 0.8,
+                      );
+                    },
+                    itemCount: widget.image.length,
+                    loadingBuilder: (context,dynamic event) => Center(
+                      child: Container(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          value: event == null ? 0 : event.cumulativeBytesLoaded / event.expectedTotalBytes,
+                        ),
+                      ),
+                    ),
+                    onPageChanged: onPageChanged,
+                  )),
+
+              Positioned(
+                right: 10,
+                top: 10,
+                child: Container(
+
+                  child: IconButton(
+                    color: Colors.white,
+                    onPressed: ()async {
+                      await SystemChrome.setPreferredOrientations(
+                          DeviceOrientation.values);
+                      await SystemChrome.setEnabledSystemUIOverlays(
+                          SystemUiOverlay.values);
+                      await SystemChrome.setPreferredOrientations([
+                        DeviceOrientation.portraitUp,
+                        DeviceOrientation.portraitDown
+                      ]);
+                      if(widget.type == "alert") {
+                        await Helper().writeStorage('selectedIndex', 1);
+                      }else{
+                        await Helper().writeStorage('selectedIndex', 0);
+                      }
+                      Get.offAllNamed(routeName.dashboard);
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
