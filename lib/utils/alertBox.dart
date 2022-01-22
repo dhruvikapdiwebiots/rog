@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/dashboard/dashboardScreen_Style.dart';
-import 'package:rog/theme/app_font.dart';
-import 'package:rog/theme/index.dart';
-import 'package:rog/utils/app_screen_util.dart';
 
 class Alertbox {
   //show alert dialog
@@ -31,9 +26,9 @@ class Alertbox {
     AlertDialog alert = AlertDialog(
       title: Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, AppScreenUtil().size(5)),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: 1.0, color: Color(0xFFFF0000)),
+            bottom: BorderSide(width: 1.0, color: appColor.redBorderColor),
           ),
         ),
         child: Text(title,
@@ -128,19 +123,19 @@ class Alertbox {
   }
 
   successMessage(message) => Get.snackbar('Success', message,
-      backgroundColor: Colors.green, colorText: Colors.white);
+      backgroundColor: appColor.greenColor, colorText: appColor.whiteColor);
 
   errorMessage(message) => Get.snackbar('Error', message,
-      backgroundColor: Colors.red, colorText: Colors.white);
+      backgroundColor: appColor.redColor, colorText: appColor.whiteColor);
 
   alertMessage(message) => Get.snackbar('Alert', message,
-      backgroundColor: Colors.yellow, colorText: Colors.black);
+      backgroundColor: appColor.yellowColor, colorText: appColor.blackColor);
 
   //success flutter toast
   showAlertDialogToSendLink(BuildContext context,{String? title,String? message}) {
     // set up the button
     Widget okButton = FlatButton(
-      child: Text("OK"),
+      child: Text(AppFont().ok),
       onPressed: () {
 
       },
@@ -150,9 +145,9 @@ class Alertbox {
     AlertDialog alert = AlertDialog(
       title: Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, AppScreenUtil().size(5)),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: 1.0, color: Color(0xFFFF0000)),
+            bottom: BorderSide(width: 1.0, color: appColor.redBorderColor),
           ),
         ),
         child: Text(title!,
@@ -161,7 +156,7 @@ class Alertbox {
       content: Text(
         message!,
         style: TextStyle(
-            color: Colors.black87, fontSize: AppScreenUtil().fontSize(16.0)),
+            color: appColor.black87Color, fontSize: AppScreenUtil().fontSize(16.0)),
       ),
       actions: [
         okButton,

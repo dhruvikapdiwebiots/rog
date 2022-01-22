@@ -15,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen>
   AnimationController? _controller;
   Tween<double> _tween = Tween(begin: 0.55, end: 2);
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -40,10 +39,21 @@ class _SplashScreenState extends State<SplashScreen>
 
   //check wether user already login or not
   void checkLogin() async {
-    String? token =await SharedPref().getSharedPref('token');
-    if(token != null && token != ""){
-      Get.toNamed(routeName.dashboard);
-    }else {
+    await Helper().writeStorage('selectedIndex', 0);
+    await Helper().writeStorage('camera_uuid', '');
+    await Helper().writeStorage('camera_groups_uuid', '');
+    await Helper().writeStorage('cameraName', '');
+    await Helper().writeStorage('groupName', '');
+    await Helper().writeStorage('type', '');
+    String? token = await SharedPref().getSharedPref('token');
+    if (token != null && token != "") {
+      bool isToken = await CommonController().checkTokenValidation();
+      if (isToken) {
+        Get.toNamed(routeName.dashboard);
+      } else {
+        Get.offAllNamed(routeName.loginScreen);
+      }
+    } else {
       Get.toNamed(routeName.loginScreen);
     }
   }
@@ -54,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
       List requestData = [];
 
       bool isToken = await CommonController().checkTokenValidation();
-      if(isToken) {
+      if (isToken) {
         print(requestData.toString());
         var resData = await apis.apiCall(apiMethods.users, requestData, 'get');
         print('status :${resData.statusCode}');
@@ -62,23 +72,21 @@ class _SplashScreenState extends State<SplashScreen>
           var data = resData.body;
           print('data : $data');
           await Helper().writeStorage('userData', data);
-          setState(() {
-
-          });
+          setState(() {});
         } else {
           print('Error while getting userData');
         }
-      }else{
+      } else {
         Get.offAllNamed(routeName.loginScreen);
       }
     } catch (e) {
-
       print(e);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: appColor.primaryColor,
         body: Container(

@@ -45,9 +45,12 @@ class AppFont {
   String noInternet = "No Internet Connection";
   String wentWrong = "Something went wrong. Try again after some time";
   String addNote = "Add Note (coming soon)";
-  String name = "First Name :";
+  String name = "Name";
   String lastname = "Last Name :";
-  String email = "Email :";
+  String email = "Email";
   String connect = "Connect";
+  String edit = "Edit";
+  String proceeding = "By proceeding, you agree to our ";
+  String and =  ' and ';
 
 }

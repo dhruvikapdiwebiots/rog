@@ -29,13 +29,18 @@ String title = '';
 
   @override
   Widget build(BuildContext context) {
+
+   //link for open license agreement and privacy statement
+   final link = WebView(
+     initialUrl: 'https://www.rogsecurity.com/tou-subscription/',
+   );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
-      body: WebView(
-        initialUrl: 'https://www.rogsecurity.com/tou-subscription/',
-      ),
+      body: link,
     );
+
   }
 }

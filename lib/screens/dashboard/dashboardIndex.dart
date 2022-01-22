@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/screens/dashboard/dashboard.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -27,9 +28,10 @@ class DashboardIndex extends StatefulWidget {
 }
 
 class _DashboardIndexState extends State<DashboardIndex> {
-
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     initNotification();
     print('init');
     super.initState();
@@ -51,11 +53,16 @@ class _DashboardIndexState extends State<DashboardIndex> {
 
       /// We use this channel in the `AndroidManifest.xml` file to override the
       /// default FCM channel to enable heads up notifications.
-      await flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel!);
+      await flutterLocalNotificationsPlugin!
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel!);
     }
 
     //when app is [closed | killed | terminated]
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
       if (message != null) {
         print("Notification On InitMsg");
         print(message);
@@ -64,8 +71,17 @@ class _DashboardIndexState extends State<DashboardIndex> {
       }
     });
 
-    var initialzationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings = InitializationSettings(android: initialzationSettingsAndroid);
+    final IOSInitializationSettings initializationSettingsIOS =
+        IOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+
+    var initialzationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettings = InitializationSettings(
+        android: initialzationSettingsAndroid, iOS: initializationSettingsIOS);
 
     flutterLocalNotificationsPlugin!.initialize(initializationSettings);
     print('initCheck');
@@ -103,8 +119,6 @@ class _DashboardIndexState extends State<DashboardIndex> {
     });
 
     requestPermissions();
-
-    getToken();
   }
 
   getToken() async {
@@ -113,7 +127,8 @@ class _DashboardIndexState extends State<DashboardIndex> {
   }
 
   requestPermissions() async {
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
       announcement: true,
       carPlay: true,
       criticalAlert: true,
@@ -122,9 +137,10 @@ class _DashboardIndexState extends State<DashboardIndex> {
     print(settings.authorizationStatus);
   }
 
-
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Dashboard();
   }
 }

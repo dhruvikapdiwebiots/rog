@@ -37,8 +37,17 @@ class SettingCommonScreen {
   //Inkwell Common
   final iconInkWellCommon = (isEnable, {GestureTapCallback? onTap}) => InkWell(
       onTap: onTap,
-      child: Icon(
-          isEnable ? CupertinoIcons.pencil_ellipsis_rectangle : Icons.edit));
+      child: Column(
+        children: [
+          Icon(
+            isEnable ? CupertinoIcons.pencil_ellipsis_rectangle : Icons.edit,
+            color: appColor.buttonColor,
+            size: AppScreenUtil().size(20),
+          ),
+          SettingCommonScreen().commonText(AppFont().edit,
+              fontSize: 12, color: appColor.buttonColor)
+        ],
+      ));
 
   //commonLayout
   final commonLayout = (title, isEnable,
@@ -46,47 +55,70 @@ class SettingCommonScreen {
           String? value,
           GestureTapCallback? onTap}) =>
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SettingCommonScreen()
+              .commonText(title, fontSize: 16, color: appColor.grey),
+          SettingScreenStyle().specingWidth(50),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SettingCommonScreen().commonText(
-                  title,
-                  fontSize: 16,
-                ),
-                SettingScreenStyle().specing(5),
                 isEnable
-                    ? textformfieldWidget!
+                    ? Expanded(child: textformfieldWidget!)
                     : Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: AppScreenUtil().size(10),
                         ),
-                        child: SettingCommonScreen()
-                            .commonText(value, fontSize: 14, textDecoration:  TextDecoration.underline),
-                      )
+                        child: SettingCommonScreen().commonText(
+                          value,
+                          fontSize: 14,
+                          textDecoration: TextDecoration.none,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                SettingCommonScreen().iconInkWellCommon(isEnable, onTap: onTap)
               ],
             ),
-          ),
-          SettingCommonScreen().iconInkWellCommon(isEnable, onTap: onTap)
+          )
         ],
       );
 
-  //main body ui design
-  final body = (BuildContext context, naemLayout, lastNameLayout, emailLayout,
-          buttonLayout) =>
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            naemLayout,
-            SettingScreenStyle().specing(10),
-            lastNameLayout,
-            SettingScreenStyle().specing(10),
-            emailLayout,
-            SettingScreenStyle().specing(50),
-            buttonLayout
-          ],
+
+  //email name show layout
+  final emailShow =(email) =>Expanded(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: AppScreenUtil().size(10),
+          ),
+          child: SettingCommonScreen().commonText(
+              email,
+              fontSize: 14,
+              textDecoration: TextDecoration.none),
         ),
-      );
+        Container()
+      ],
+    ),
+  );
+
+  //main body ui design
+  final body =
+      (BuildContext context, naemLayout, emailLayout, buttonLayout) => Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Column(
+                children: [
+                  SettingScreenStyle().specing(20),
+                  naemLayout,
+                  SettingScreenStyle().specing(35),
+                  emailLayout,
+                  SettingScreenStyle().specing(50),
+                ],
+              ),
+              buttonLayout
+            ],
+          );
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
@@ -7,6 +7,8 @@ import 'package:rog/screens/cameraCard/cameraCard_controller.dart';
 import 'package:rog/screens/cameraCard/viewandalertLayout.dart';
 import 'package:rog/screens/dashboard/bottomNavigatorBarCommon.dart';
 import 'package:rog/screens/dashboard/dashboard_Controller.dart';
+import 'package:rog/utils/common_example_wrapper.dart';
+import 'package:rog/utils/helper.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({Key? key}) : super(key: key);
@@ -18,8 +20,29 @@ class CameraCard extends StatefulWidget {
 class _CameraCardState extends State<CameraCard> {
   var cameraCardCtrl = Get.put(CameraCardController());
 
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+    // TODO: implement initState
+    var data = Get.arguments;
+    cameraCardCtrl.name = data['cameraName'];
+    cameraCardCtrl.groupname = data['groupName'];
+
+    print('name : ${cameraCardCtrl.name}');
+    print('groupName : ${cameraCardCtrl.groupname}');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     //camera name
     final cameraNameLayout = GetBuilder<CameraCardController>(
       builder: (_) => CameraCardScreenStyle().cameraAndGroupNameStyle(
@@ -34,69 +57,110 @@ class _CameraCardState extends State<CameraCard> {
     );
 
     //image layout
-    final imageLayout = Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        CameraCardCommonScreen().imageLayout(context, imageAssets.house2),
-       CameraCardScreenStyle().viewLiveAndAlertStyle(
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             ViewAndAlertLayout(
-               image: iconAssets.view,
-               text: AppFont().viewLive,
-             ),
-             ViewAndAlertLayout(
-               image: iconAssets.wifi,
-               text: AppFont().alertGroup,
-             )
-           ],
-         ),
-       )
-      ],
+    final imageLayout = GetBuilder<CameraCardController>(
+      builder: (_) => cameraCardCtrl.data != null && cameraCardCtrl.data != ""
+          ? Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                InkWell(
+                  onTap: () async {
+                    await Helper().writeStorage('type', 'cameraview');
+                    Navigator.of(context).push(AlertImagePreview(type: 'cameraview',
+                        image: cameraCardCtrl.data['imagesArray']));
+                  },
+                  child: CameraCardCommonScreen().imageLayout(
+                      context, cameraCardCtrl.data['thumbnail_url']),
+                ),
+                CameraCardScreenStyle().viewLiveAndAlertStyle(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: AppScreenUtil().size(10)),
+                        child: ViewAndAlertLayout(
+                          image: iconAssets.view,
+                          text: AppFont().viewLive,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: AppScreenUtil().size(25)),
+                        child: ViewAndAlertLayout(
+                          image: iconAssets.wifi,
+                          text: AppFont().alertGroup,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )
+          : Container(),
     );
 
     //time date display layout
-    final timeDateDisplay = Container(
-     child: Column(
-       children: [
-         CameraCardCommonScreen().commonText(AppFont().lastImageReceived,fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('11/30/2021',fontSize: 16,color: appColor.grey),
-         CameraCardScreenStyle().specing(8),
-         CameraCardCommonScreen().commonText('04:53:01 Pm PST',fontSize: 16,color: appColor.grey),
-       ],
-     ),
+    final timeDateDisplay = GetBuilder<CameraCardController>(
+      builder: (_) => cameraCardCtrl.data != null
+          ? Container(
+              child: Column(
+                children: [
+                  CameraCardCommonScreen().commonText(
+                      AppFont().lastImageReceived,
+                      fontSize: 16,
+                      color: appColor.grey),
+                  CameraCardScreenStyle().specing(8),
+                  CameraCardCommonScreen().commonText(cameraCardCtrl.date,
+                      fontSize: 16, color: appColor.grey),
+                  CameraCardScreenStyle().specing(8),
+                  CameraCardCommonScreen().commonText(
+                      '${cameraCardCtrl.time} PST',
+                      fontSize: 16,
+                      color: appColor.grey),
+                ],
+              ),
+            )
+          : Container(),
     );
 
     return GetBuilder<CameraCardController>(
-      builder: (_) => GetBuilder<DashboardController>(
-        builder: (controller) => Scaffold(
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: appColor.primaryColor,
-              boxShadow: [
-                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
-              ],
+      builder: (_) => GetBuilder<DashboardController>(builder: (controller) {
+        return WillPopScope(
+          onWillPop: () async {
+            cameraCardCtrl.onBackFunction();
+            return false;
+          },
+          child: Scaffold(
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: appColor.primaryColor,
+                boxShadow: [
+                  BoxShadow(blurRadius: 20, color: appColor.blackColor.withOpacity(.1))
+                ],
+              ),
+              child: BottomNavigatorCard(
+                selectedIndex: controller.selectedIndex,
+                onTap: (index) async {
+                  Get.back();
+                  Get.back();
+
+                  controller.navigationbarchange(index);
+                },
+              ),
             ),
-            child: BottomNavigatorCard(
-              selectedIndex: controller.selectedIndex,
-              onTap: (index) {
-                Get.back();
-                Get.back();
-                controller.navigationbarchange(index);},
+            appBar:
+                CameraCardScreenStyle().appBarStyle(context, onBack: () async {
+              cameraCardCtrl.onBackAppBar();
+            }),
+            body: Container(
+              child: CameraCardCommonScreen().body(
+                  context, cameraNameLayout, imageLayout, timeDateDisplay),
             ),
           ),
-          appBar: AppBar(
-            title: CameraCardCommonScreen()
-                .commonText(AppFont().cameraView, fontSize: 18),
-          ),
-          body: Container(
-            child: CameraCardCommonScreen()
-                .body(context, cameraNameLayout, imageLayout,timeDateDisplay),
-          ),
-        ),
-      ),
+        );
+      }),
     );
   }
+
+
 }

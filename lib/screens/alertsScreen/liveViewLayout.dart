@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen_Style.dart';
@@ -12,7 +11,7 @@ class LiveViewLayout extends StatelessWidget {
       child: Align(
         alignment: Alignment.topCenter,
         child: AlertsScreenStyle().viewLiveAndAlertStyle(
-          Colors.black54.withOpacity(.7),
+          appColor.darkGray.withOpacity(.8),
           child: Row(
             children: [
               AlertsScreenStyle().specingWidth(15),
@@ -24,7 +23,8 @@ class LiveViewLayout extends StatelessWidget {
               AlertCommonScreen().commonText(AppFont().viewLive,
                   fontSize: 12, letterSpacing: .5, color: appColor.whiteColor)
             ],
-          ),),
+          ),
+        ),
       ),
     );
   }

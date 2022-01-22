@@ -27,7 +27,7 @@
     </queries>
 
    <application
-        android:label="rog"
+        android:label="ROG"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

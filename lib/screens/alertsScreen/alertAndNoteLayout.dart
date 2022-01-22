@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertCommonScreen.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen_Style.dart';
@@ -19,7 +18,7 @@ class AlertAndNoteLayout extends StatelessWidget {
         ),
         AlertsScreenStyle().specing(5),
         AlertCommonScreen().commonText(text,
-            fontSize: 12, letterSpacing: .5, color: appColor.whiteColor)
+            fontSize: 10, letterSpacing: .5, color: appColor.whiteColor)
       ],
     );
   }

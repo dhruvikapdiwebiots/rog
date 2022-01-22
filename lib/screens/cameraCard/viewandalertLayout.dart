@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/cameraCard/CameraCardScreen_Style.dart';
 import 'package:rog/screens/cameraCard/cameraCardCommonScreen.dart';
@@ -19,7 +18,7 @@ class ViewAndAlertLayout extends StatelessWidget {
         ),
         CameraCardScreenStyle().specing(5),
         CameraCardCommonScreen().commonText(text,
-            fontSize: 12, letterSpacing: .5, color: appColor.whiteColor)
+            fontSize: 10, letterSpacing: .3, color: appColor.whiteColor)
       ],
     );
   }

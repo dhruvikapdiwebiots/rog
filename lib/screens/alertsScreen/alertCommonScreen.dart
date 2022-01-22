@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen_Style.dart';
+import 'package:rog/utils/custom_cached_network_image.dart';
 
 class AlertCommonScreen {
   // common Text Layout
@@ -22,21 +22,17 @@ class AlertCommonScreen {
 
   //imageLayout
   final imageLayout = (
-      context,
-      image,
-      ) =>
-      Image.asset(
-        image,
-        width: MediaQuery.of(context).size.width,
-        height: AppScreenUtil().size(420),
-        fit: BoxFit.fill,
+    context,
+    image,
+  ) =>
+      CustomCachedNetworkImage(
+        url: image,
+        width: AppScreenUtil().size(400),
+        height: AppScreenUtil().size(300),
+        fit: BoxFit.cover,
+        errorLocalPath: imageAssets.cameraNote,
       );
 
-
-
   //main body ui design
-  final body = (BuildContext context,list
-    ) =>
-  list;
-
+  final body = (BuildContext context, list) => list;
 }

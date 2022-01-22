@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/settingScreen/SettingScreen_Style.dart';
 import 'package:rog/screens/settingScreen/settingCommonScreen.dart';
@@ -24,6 +25,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     textformfieldWidget: Container(
                       width: MediaQuery.of(context).size.width,
                       child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.characters,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp("[A-Z]")),
+
+                        ],
                         controller: settingCtrl.controller,
                       ),
                     ),
@@ -32,43 +39,15 @@ class _SettingScreenState extends State<SettingScreen> {
               settingCtrl.isNameEdit();
             }));
 
-    //Lastname Layout
-    final lastNameLayout = GetBuilder<SettingController>(
-        builder: (_) => SettingCommonScreen()
-                .commonLayout(AppFont().lastname, settingCtrl.isLastNameEnable,
-                    textformfieldWidget: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        controller: settingCtrl.lastNameController,
-                      ),
-                    ),
-                    value: settingCtrl.dashboardCtrl.lastname, onTap: () {
-              print('tap');
-              settingCtrl.isLastNameEdit();
-            }));
-
     //email Layout
     final emailLayout = GetBuilder<SettingController>(
         builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SettingCommonScreen()
-                        .commonText(AppFont().email, fontSize: 16),
-                    SettingScreenStyle().specingWidth(10),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: AppScreenUtil().size(10),
-                      ),
-                      child: SettingCommonScreen().commonText(
-                          settingCtrl.dashboardCtrl.email,
-                          fontSize: 14,
-                          textDecoration: TextDecoration.underline),
-                    )
-                  ],
-                ),
+                SettingCommonScreen().commonText(AppFont().email,
+                    fontSize: 16, color: appColor.grey),
+                SettingScreenStyle().specingWidth(55),
+                SettingCommonScreen().emailShow(settingCtrl.dashboardCtrl.email)
               ],
             ));
 
@@ -82,18 +61,18 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return GetBuilder<SettingController>(
       builder: (_) => Scaffold(
-        body: SingleChildScrollView(
-          child: settingCtrl.isLoading
-              ? LoadingComponent()
-              : Container(
-                  height: MediaQuery.of(context).size.height,
-                  margin: EdgeInsets.symmetric(
-                      vertical: AppScreenUtil().size(25),
-                      horizontal: AppScreenUtil().size(20)),
-                  child: SettingCommonScreen().body(context, naemLayout,
-                      lastNameLayout, emailLayout, buttonLayout),
-                ),
-        ),
+        body: settingCtrl.isLoading
+            ? LoadingComponent()
+            : Container(
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.only(
+                    top: AppScreenUtil().size(40),
+                    left: AppScreenUtil().size(20),
+                    right: AppScreenUtil().size(20),
+                    bottom: AppScreenUtil().size(100)),
+                child: SettingCommonScreen()
+                    .body(context, naemLayout, emailLayout, buttonLayout),
+              ),
       ),
     );
   }

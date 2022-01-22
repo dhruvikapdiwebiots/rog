@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
 import 'package:rog/screens/splashScreen/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rog/utils/commonController.dart';
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp();
   await GetStorage.init();
   Get.put(CommonController());
+  Get.put(AlertScreenController());
   runApp(MyApp());
 }
 

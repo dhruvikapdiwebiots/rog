@@ -97,6 +97,11 @@ class LoginController extends GetxController {
         isLoading = false;
         var data = resData.body;
         await Helper().writeStorage('userData', data);
+        await Helper().writeStorage('camera_uuid', '');
+        await Helper().writeStorage('camera_groups_uuid', '');
+        await Helper().writeStorage('cameraName', '');
+        await Helper().writeStorage('groupName', '');
+        await Helper().writeStorage('type', '');
         update();
         await setFirebase();
         Get.toNamed(routeName.dashboard);
@@ -112,28 +117,34 @@ class LoginController extends GetxController {
     }
   }
 
+//check whether user is exists or not and save fcmtoken
   setFirebase() async {
     var token = await FirebaseMessaging.instance.getToken();
+    print('loginToken : $token');
     dynamic userData = await Helper().getStorage('userData');
     print('userData : $userData');
+    String uuid = userData['uuid'];
+    print('uu : $uuid');
+    Map<String, dynamic> data = <String, dynamic>{
+      "fcmToken": token,
+    };
+    DocumentReference documentReferencer =
+        uuid == "" ? users.doc() : users.doc(uuid);
 
-    /*users
-        .doc(userData['userId'])
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        users
-            .doc(userData['userId'])
-            .update({'fcmToken': token})
-            .then((value) => print("User Updated"))
-            .catchError((error) => print("Failed to update user: $error"));
-      } else {
-        users
-            .add({'userId': userData['userId'], 'fcmToken': token})
-            .then((value) => print("User Added"))
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-    });*/
+    DocumentSnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+    if (querySnapshot.exists) {
+      await documentReferencer
+          .update(data)
+          .whenComplete(() => print('Update Done'))
+          .catchError((e) => print(e));
+    } else {
+      print('errt');
+      await documentReferencer
+          .set(data)
+          .whenComplete(() => print('Done'))
+          .catchError((e) => print(e));
+    }
   }
 
   //forgot password api

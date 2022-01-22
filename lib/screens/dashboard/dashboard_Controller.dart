@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rog/packages/config_package.dart';
+import 'package:rog/screens/alertsScreen/alertScreen_controller.dart';
 import 'package:rog/screens/alertsScreen/alertsScreen.dart';
 import 'package:rog/screens/cameragroup/cameragroup.dart';
-import 'package:rog/screens/connect/connect.dart';
 import 'package:rog/screens/settingScreen/settingScreen.dart';
 import 'package:rog/utils/commonController.dart';
 import 'package:rog/utils/helper.dart';
@@ -13,11 +13,11 @@ class DashboardController extends GetxController {
   String lastname = '';
   String email = '';
   CommonController commonController = Get.find();
+  AlertScreenController alertController = Get.find();
 
   //list of bottomnavigator page
   List<Widget> widgetOptions = <Widget>[
     CameraGroup(),
-    Connect(),
     AlertsScreen(),
     SettingScreen()
   ];
@@ -31,11 +31,18 @@ class DashboardController extends GetxController {
 
   //navigation bar change
   navigationbarchange(int index) async {
+    String type = await Helper().getStorage('type');
+    if (type == 'cameraview' && type != "") {
+      await Helper().writeStorage('type', '');
+    }
     await Helper().writeStorage('selectedIndex', selectedIndex);
     selectedIndex = index;
     print('index : ' + index.toString());
     update();
-    if (selectedIndex == 3) {
+    if (selectedIndex == 1) {
+      alertController.getAlertData();
+    }
+    if (selectedIndex == 2) {
       dynamic userData = await Helper().getStorage('userData');
       name = userData['first_name'];
       lastname = userData['last_name'];
@@ -43,5 +50,60 @@ class DashboardController extends GetxController {
       print('name : $name');
       update();
     }
+  }
+
+  //get selected Bottom Navigation Index Value
+  getselectIndex() async {
+    print('getselecteIndex');
+    int index = await Helper().getStorage('selectedIndex');
+    print('selectedIndex : $index');
+    if (index == 1) {
+      selectedIndex = 1;
+      update();
+    } else {
+      selectedIndex = 0;
+    }
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    update();
+  }
+
+  //Save the Bottom Navigation at 0 Index
+  saveIndex() async {
+    await Helper().writeStorage('selectedIndex', 0);
+    update();
+  }
+
+  //Check Whether last page visit is cameraview and according to
+  //that fetch value and send to camera view page
+  checkType() async {
+    await Helper().writeStorage('selectedIndex', 0);
+    String type = await Helper().getStorage('type');
+    if (type == 'cameraview' && type != "") {
+      String name = await Helper().getStorage('cameraName');
+      String groupname = await Helper().getStorage('groupName');
+      String cameraGroupId = await Helper().getStorage('camera_groups_uuid');
+      String cameraId = await Helper().getStorage('camera_uuid');
+      print('name : $name');
+      print('groupname : $groupname');
+      var data = {
+        'camera_groups_uuid': cameraGroupId,
+        'camera_uuid': cameraId,
+        'cameraName': name,
+        'groupName': groupname
+      };
+
+      Get.toNamed(routeName.cameraCard, arguments: data);
+    }
+    update();
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    getselectIndex();
+    saveIndex();
+    checkType();
+    super.onInit();
   }
 }
