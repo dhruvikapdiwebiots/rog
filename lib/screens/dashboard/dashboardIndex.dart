@@ -1,10 +1,15 @@
+import 'dart:async';
+
+import 'package:cron/cron.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rog/packages/config_package.dart';
 import 'package:rog/screens/dashboard/dashboard.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rog/utils/commonController.dart';
+import 'package:rog/utils/helper.dart';
 
 //when app in background
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -27,14 +32,44 @@ class DashboardIndex extends StatefulWidget {
   _DashboardIndexState createState() => _DashboardIndexState();
 }
 
-class _DashboardIndexState extends State<DashboardIndex> {
+class _DashboardIndexState extends State<DashboardIndex>
+    with WidgetsBindingObserver {
+  CommonController commonController = Get.find();
+  Timer? timer;
+  var cron = new Cron();
+
   @override
   void initState() {
+    WidgetsBinding.instance!.addObserver(this);
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     initNotification();
     print('init');
+    cron.schedule(Schedule.parse('*/3 * * * *'), () {
+      print('Date : ${DateTime.now()}');
+      commonController.getNewAlertCount();
+    });
+
     super.initState();
+  }
+
+  //Check whether app is in which state
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    print('Indexstate : $state');
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+
+    cron.close();
+    super.dispose();
+  }
+
+  @override
+  void onDeactivate() {
+    super.deactivate();
   }
 
   Future<void> initNotification() async {
@@ -67,15 +102,15 @@ class _DashboardIndexState extends State<DashboardIndex> {
         print("Notification On InitMsg");
         print(message);
         //Navigator.pushNamed(context, '/result', arguments: message.data);
-
+        _notificationNavigateToItemDetail(message);
       }
     });
 
     final IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
+      requestSoundPermission: true,
+      requestBadgePermission: true,
+      requestAlertPermission: true,
     );
 
     var initialzationSettingsAndroid =
@@ -106,7 +141,7 @@ class _DashboardIndexState extends State<DashboardIndex> {
               ),
             ));
       }
-
+      _notificationNavigateToItemDetail(message);
       //Navigator.pushNamed(context, '/result', arguments: message.data);
     });
 
@@ -114,11 +149,24 @@ class _DashboardIndexState extends State<DashboardIndex> {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       print(message);
-      //Navigator.push(context, MaterialPageRoute(builder: (_) => ResultScreen(data: message.data)));
-      //Navigator.pushNamed(context, '/result', arguments: message.data);
+
+      _notificationNavigateToItemDetail(message);
     });
 
     requestPermissions();
+  }
+
+  //on click navigate to alert screeb
+  void _notificationNavigateToItemDetail(RemoteMessage message) async {
+    print("Call Notification");
+
+    dynamic additionalData = message.data;
+    print('notificationData : $additionalData');
+    if (additionalData["alertMessage"] == "true") {
+      await Helper().writeStorage('selectedIndex', 1);
+      await Helper().writeStorage('alertMessage', 'true');
+      Get.toNamed(routeName.dashboard);
+    }
   }
 
   getToken() async {

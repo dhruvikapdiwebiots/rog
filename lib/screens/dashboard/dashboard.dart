@@ -22,6 +22,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver  {
   @override
   void initState() {
     // TODO: implement initState
+    dashboardCtrl.getNotificationData();
     WidgetsBinding.instance!.addObserver(this);
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -34,6 +35,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver  {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     print('state : $state');
+  //  Timer.periodic(Duration(minutes: 5), (Timer t) => dashboardCtrl.commonController.getNewAlertCount());
   }
 
 
@@ -57,6 +59,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver  {
         },
         child: Scaffold(
           bottomNavigationBar: BottomNavigatorCard(
+            alertCount: dashboardCtrl.commonController.alertCount,
             selectedIndex: dashboardCtrl.selectedIndex,
             onTap: (index) => dashboardCtrl.navigationbarchange(index),
           ),

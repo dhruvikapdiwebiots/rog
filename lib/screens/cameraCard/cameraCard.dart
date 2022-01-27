@@ -28,6 +28,8 @@ class _CameraCardState extends State<CameraCard> {
       DeviceOrientation.portraitDown
     ]);
     // TODO: implement initState
+
+    //get argument data coming from last visiting page
     var data = Get.arguments;
     cameraCardCtrl.name = data['cameraName'];
     cameraCardCtrl.groupname = data['groupName'];
@@ -43,6 +45,7 @@ class _CameraCardState extends State<CameraCard> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
     ]);
+
     //camera name
     final cameraNameLayout = GetBuilder<CameraCardController>(
       builder: (_) => CameraCardScreenStyle().cameraAndGroupNameStyle(
@@ -139,11 +142,11 @@ class _CameraCardState extends State<CameraCard> {
                 ],
               ),
               child: BottomNavigatorCard(
+                alertCount: cameraCardCtrl.commonController.alertCount,
                 selectedIndex: controller.selectedIndex,
                 onTap: (index) async {
                   Get.back();
                   Get.back();
-
                   controller.navigationbarchange(index);
                 },
               ),

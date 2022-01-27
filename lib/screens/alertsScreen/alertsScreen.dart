@@ -63,6 +63,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
     return GetBuilder<AlertScreenController>(
         builder: (_) => Scaffold(
               backgroundColor: appColor.backgroundColor,
+
               body: Container(
                 margin: EdgeInsets.all(AppScreenUtil().size(10)),
                 child: AlertCommonScreen().body(

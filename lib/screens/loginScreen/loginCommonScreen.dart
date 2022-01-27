@@ -55,6 +55,7 @@ class LoginCommonScreen {
         style: TextStyle(color: appColor.redColor),
       ));
 
+  //signup container layout
   final signupContainerLayout = ({GestureTapCallback? onTap}) => InkWell(
       onTap: onTap,
       child: Container(

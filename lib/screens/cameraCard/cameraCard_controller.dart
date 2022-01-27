@@ -11,6 +11,7 @@ class CameraCardController extends GetxController {
   String date = '';
   String camera_uuid = '';
   String camera_groups_uuid = '';
+  CommonController commonController = Get.find();
 
   @override
   void onInit() {
@@ -68,6 +69,7 @@ class CameraCardController extends GetxController {
     } else {
       groupname = data['groupName'];
     }
+
     update();
   }
 

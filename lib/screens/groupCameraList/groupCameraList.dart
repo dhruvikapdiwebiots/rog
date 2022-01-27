@@ -64,6 +64,7 @@ class _GroupCameraListState extends State<GroupCameraList> {
                 ],
               ),
               child: BottomNavigatorCard(
+                alertCount: controller.commonController.alertCount,
                 selectedIndex: controller.selectedIndex,
                 onTap: (index) {
                   Get.back();
