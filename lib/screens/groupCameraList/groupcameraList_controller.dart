@@ -94,6 +94,7 @@ class GroupCameraListController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    //get argument data came from last visiting page
     var args = Get.arguments;
     print('args : $args');
     if (args != null && args != "") {

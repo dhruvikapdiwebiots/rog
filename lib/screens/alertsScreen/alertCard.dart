@@ -13,6 +13,7 @@ class AlertCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //get date in MM/dd/yyyy hh:mm: a format
     String createdDate = DateFormat('MM/dd/yyyy hh:mm a')
         .format(DateTime.parse(data["inserted_at"]));
     print('Date : ${data["inserted_at"]}');

@@ -12,6 +12,7 @@ class DashboardController extends GetxController {
   String name = '';
   String lastname = '';
   String email = '';
+  String alertCount = '';
   CommonController commonController = Get.find();
   AlertScreenController alertController = Get.find();
 
@@ -22,10 +23,16 @@ class DashboardController extends GetxController {
     SettingScreen()
   ];
 
+
   //on back from different page take it to last visit page
   onBack() async {
     int index = await Helper().getStorage('selectedIndex');
+    String alertMessage = await Helper().getStorage('alertMessage');
+    if(alertMessage != '' && alertMessage == 'true'){
+      await Helper().writeStorage('alertMessage', '');
+    }
     selectedIndex = index;
+
     update();
   }
 
@@ -41,6 +48,8 @@ class DashboardController extends GetxController {
     update();
     if (selectedIndex == 1) {
       alertController.getAlertData();
+      await Helper().writeStorage('alertCount', '0');
+      update();
     }
     if (selectedIndex == 2) {
       dynamic userData = await Helper().getStorage('userData');
@@ -50,12 +59,26 @@ class DashboardController extends GetxController {
       print('name : $name');
       update();
     }
+    String alertMessage = await Helper().getStorage('alertMessage');
+    if(alertMessage != '' && alertMessage == 'true'){
+      await Helper().writeStorage('alertMessage', '');
+      commonController.alertCount = '0';
+      update();
+    }
   }
 
   //get selected Bottom Navigation Index Value
   getselectIndex() async {
     print('getselecteIndex');
     int index = await Helper().getStorage('selectedIndex');
+    alertCount = await Helper().getStorage('alertCount');
+    var alertMessage = await Helper().getStorage('alertMessage');
+    print('alertMes : $alertMessage');
+    if(alertMessage == 'true' && alertCount != ''){
+      print('tap');
+      selectedIndex = 1;
+      await Helper().writeStorage('selectedIndex', selectedIndex);
+    }
     print('selectedIndex : $index');
     if (index == 1) {
       selectedIndex = 1;
@@ -66,6 +89,18 @@ class DashboardController extends GetxController {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     update();
+  }
+
+
+  //getNotificaton Data
+  getNotificationData()async{
+    var alertMessage = await Helper().getStorage('alertMessage');
+    print('alertMes : $alertMessage');
+    if(alertMessage == 'true'){
+      print('tap');
+      selectedIndex = 1;
+      await Helper().writeStorage('selectedIndex', selectedIndex);
+    }
   }
 
   //Save the Bottom Navigation at 0 Index
@@ -105,5 +140,12 @@ class DashboardController extends GetxController {
     saveIndex();
     checkType();
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    getNotificationData();
+    super.onReady();
   }
 }

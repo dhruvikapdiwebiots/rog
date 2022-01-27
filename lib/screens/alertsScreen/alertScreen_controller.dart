@@ -17,6 +17,8 @@ class AlertScreenController extends GetxController {
       update();
       List requestData = [];
       var userData = await Helper().getStorage('userData');
+      var alertCount = await Helper().getStorage('alertCount');
+      print('alertCount : $alertCount');
 
       bool isToken = await CommonController().checkTokenValidation();
       if (isToken) {
